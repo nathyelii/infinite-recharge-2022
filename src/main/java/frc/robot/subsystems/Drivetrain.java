@@ -66,7 +66,7 @@ public class Drivetrain extends SubsystemBase {
         leftFather.setSensorPhase(true);
         rightFather.setSensorPhase(true);
         leftFather.setInverted(false);
-        rightFather.setInverted(true);
+        rightFather.setInverted(false);
 
         leftSon.follow(leftFather);
         rightSon.follow(rightFather);

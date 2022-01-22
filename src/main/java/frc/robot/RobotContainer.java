@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -31,8 +32,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    m_robotDrive.setDefaultCommand(new Drive(() -> driverLeftStick.getX(Hand.kLeft),
-                () -> driverRightStick.getY(Hand.kRight), m_robotDrive));
+    m_robotDrive.setDefaultCommand(new Drive(() -> driverLeftStick.getX(),
+                () -> driverRightStick.getY(), m_robotDrive));
 
                 
     // Configure the button bindings
@@ -54,6 +55,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
