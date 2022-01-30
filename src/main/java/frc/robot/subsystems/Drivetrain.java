@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.ADIS16448_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.IronMechEncoder;
@@ -20,8 +20,8 @@ import frc.robot.Constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
 
-    private final MotorController m_leftMotor;
-    private final MotorController m_rightMotor;
+    private final MotorControllerGroup m_leftMotor;
+    private final MotorControllerGroup m_rightMotor;
 
     private final DifferentialDrive m_drive;
 
@@ -82,8 +82,8 @@ public class Drivetrain extends SubsystemBase {
 
         // Let's name the sensors on the LiveWindow
 
-        m_leftMotor = new MotorController(leftFather, leftSon);
-        m_rightMotor = new MotorController(rightFather, rightSon);
+        m_leftMotor = new MotorControllerGroup(leftFather, leftSon);
+        m_rightMotor = new MotorControllerGroup(rightFather, rightSon);
         m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
         m_drive.setSafetyEnabled(false);
         addChild("Drive", m_drive);
