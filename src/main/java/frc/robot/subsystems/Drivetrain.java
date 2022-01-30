@@ -82,8 +82,8 @@ public class Drivetrain extends SubsystemBase {
 
         // Let's name the sensors on the LiveWindow
 
-        m_leftMotor = new SpeedControllerGroup(leftFather, leftSon);
-        m_rightMotor = new SpeedControllerGroup(rightFather, rightSon);
+        m_leftMotor = new MotorController(leftFather, leftSon);
+        m_rightMotor = new MotorController(rightFather, rightSon);
         m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
         m_drive.setSafetyEnabled(false);
         addChild("Drive", m_drive);
