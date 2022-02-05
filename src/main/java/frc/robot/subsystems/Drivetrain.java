@@ -26,12 +26,12 @@ public class Drivetrain extends SubsystemBase {
     private final DifferentialDrive m_drive;
 
     // parent motors
-    private final WPI_TalonSRX leftFather = new WPI_TalonSRX(DriveConstants.LEFTFATHER);
-    private final WPI_TalonSRX rightFather = new WPI_TalonSRX(DriveConstants.RIGHTFATHER);
+    private final WPI_TalonSRX leftFather = new WPI_TalonSRX(DriveConstants.LEFTFATHERCANBUSNUMBER);
+    private final WPI_TalonSRX rightFather = new WPI_TalonSRX(DriveConstants.RIGHTFATHERCANBUSNUMBER);
 
     // son motors
-    private final WPI_VictorSPX leftSon = new WPI_VictorSPX(DriveConstants.LEFTSON);
-    private final WPI_VictorSPX rightSon = new WPI_VictorSPX(DriveConstants.RIGHTSON);
+    private final WPI_VictorSPX leftSon = new WPI_VictorSPX(DriveConstants.LEFTSONCANBUSNUMBER);
+    private final WPI_VictorSPX rightSon = new WPI_VictorSPX(DriveConstants.RIGHTSONCANBUSNUMBER);
 
     private final NeutralMode brakeMode = NeutralMode.Brake;
 
