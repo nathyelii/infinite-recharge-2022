@@ -53,6 +53,12 @@ public final class Constants {
         public static final double climbSpeedStop=0;
     }
 
+   public static final class ConveyorConstants{ 
+       public static final int CoveyorCANBUSNUMBER= 4; 
+       public static final double conveyorSpeed = .5; 
+       public static final double conveyorSpeedStop= 0; 
+   }
+
     public static final class DriveConstants {
 
         // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
@@ -73,10 +79,10 @@ public final class Constants {
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
                 kTrackwidthMeters);
 
-        public static final int RIGHTSON = 3;
-        public static final int LEFTSON = 2;
-        public static final int RIGHTFATHER = 0;
-        public static final int LEFTFATHER = 1;
+        public static final int RIGHTSONCANBUSNUMBER = 3;
+        public static final int LEFTSONCANBUSNUMBER = 2;
+        public static final int RIGHTFATHERCANBUSNUMBER = 0;
+        public static final int LEFTFATHERCANBUSNUMBER = 1;
 
         public static final boolean kLeftEncoderReversed = false;
         public static final boolean kRightEncoderReversed = true;
