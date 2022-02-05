@@ -60,7 +60,7 @@ public class RobotContainer {
     final JoystickButton climbUp = new JoystickButton(driverRightStick, 2);
     final JoystickButton climbDown = new JoystickButton(driverLeftStick, 2);
     final JoystickButton conveyorUp = new JoystickButton(driverRightStick, 4);
-      final JoystickButton conveyorDown = new JoystickButton(driverLeftStick, 3);
+      final JoystickButton conveyorDown = new JoystickButton(driverLeftStick, 4);
 
     //button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
