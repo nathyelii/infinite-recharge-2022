@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
@@ -53,10 +54,11 @@ public class RobotContainer {
 
   //buttons here
     final JoystickButton climbUp = new JoystickButton(driverRightStick, 2);
-    
+    final JoystickButton climbDown = new JoystickButton(driverLeftStick, 2);
 
     //button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
+    climbDown.whileHeld(new ClimbDown(m_robotClimber)); 
 
   }
 
