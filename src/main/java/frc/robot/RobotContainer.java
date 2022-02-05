@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
+import frc.robot.commands.ConveyorDown;
+import frc.robot.commands.ConveyorUp;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -25,7 +28,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   
   final Drivetrain m_robotDrive = new Drivetrain();
-  final Climber m_robotClimber = new Climber(); 
+  final Climber m_robotClimber = new Climber();
+  final Conveyor m_robotConveyor = new Conveyor(); 
   
   // The robot's subsystems and commands are defined here...
   private final Joystick driverLeftStick = new Joystick(0);
@@ -55,13 +59,18 @@ public class RobotContainer {
   //buttons here
     final JoystickButton climbUp = new JoystickButton(driverRightStick, 2);
     final JoystickButton climbDown = new JoystickButton(driverLeftStick, 2);
+    final JoystickButton conveyorUp = new JoystickButton(driverRightStick, 4);
+      final JoystickButton conveyorDown = new JoystickButton(driverLeftStick, 3);
 
     //button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
     climbDown.whileHeld(new ClimbDown(m_robotClimber)); 
+     conveyorUp.whileHeld(new ConveyorUp(m_robotConveyor));
+     conveyorDown.whileHeld(new ConveyorDown(m_robotConveyor));
 
-  }
+  } 
 
+    
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
