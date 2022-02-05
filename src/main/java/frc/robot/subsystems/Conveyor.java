@@ -15,6 +15,6 @@ public class Conveyor extends SubsystemBase {
     } 
 
     public void set(double value){
-        conveyorMotor.set(VictorSPXControlMode.PercentOutput, 0.5);
+        conveyorMotor.set(VictorSPXControlMode.PercentOutput,value);
     }
 }
