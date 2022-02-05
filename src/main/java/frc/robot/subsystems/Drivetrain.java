@@ -164,7 +164,7 @@ public class Drivetrain extends SubsystemBase {
         if (Math.abs(rot) <= .05) {
           rot = 0;
         }
-        m_drive.arcadeDrive(fwd, -1 * rot);
+        m_drive.arcadeDrive(fwd, -1 * rot,true);
         // m_drive.tankDrive(left, right);
         return null;
       }

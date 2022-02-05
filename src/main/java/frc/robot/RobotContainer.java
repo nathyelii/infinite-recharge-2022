@@ -54,10 +54,12 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //buttons here
-    final JoystickButton collectorIn = new JoystickButton(copilot, 1);
+    final JoystickButton collectorIn = new JoystickButton(driverRightStick, 1);
+    final JoystickButton collectorOut = new JoystickButton(driverLeftStick, 1);
 
     //button actions here
-    collectorIn.toggleWhenPressed(new Collect(m_collector, -.9));
+    collectorIn.whileHeld(new Collect(m_collector, .9));
+    collectorOut.whileHeld(new Collect(m_collector, -.9));
 
   }
 

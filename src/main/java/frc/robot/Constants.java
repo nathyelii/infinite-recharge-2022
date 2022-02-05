@@ -70,15 +70,16 @@ public final class Constants {
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
                 kTrackwidthMeters);
 
-        public static final int RIGHTSON = 3;
-        public static final int LEFTSON = 2;
+        
         public static final int RIGHTFATHER = 0;
         public static final int LEFTFATHER = 1;
+        public static final int LEFTSON = 2;
+        public static final int RIGHTSON = 3;
 
         public static final boolean kLeftEncoderReversed = false;
         public static final boolean kRightEncoderReversed = true;
 
-        public static final int kEncoderCPR = 4096;
+        public static final int kEncoderCPR = 4096;g
         public static final double kWheelDiameterMeters = 0.1397;
 
         public static final double METERSPERPULSE = (kWheelDiameterMeters * Math.PI) / kEncoderCPR;
