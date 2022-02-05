@@ -28,6 +28,7 @@ public class Drive extends CommandBase {
    * @param drivetrain The drivetrain subsystem to drive
    */
   public Drive(DoubleSupplier left, DoubleSupplier right, Drivetrain drivetrain) {
+    super();
     m_drivetrain = drivetrain;
     m_left = left;
     m_right = right;
