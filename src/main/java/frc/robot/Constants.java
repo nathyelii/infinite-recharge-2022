@@ -45,6 +45,12 @@ public final class Constants {
      */
     public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
 
+
+    public static final class ClimberConstants {
+
+        public static final int climberChannel = 1; 
+    }
+
     public static final class DriveConstants {
 
         // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!

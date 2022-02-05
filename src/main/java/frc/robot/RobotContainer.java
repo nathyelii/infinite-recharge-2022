@@ -6,12 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ClimbUp;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   
   final Drivetrain m_robotDrive = new Drivetrain();
+  final Climber m_robotClimber = new Climber(); 
   
   // The robot's subsystems and commands are defined here...
   private final Joystick driverLeftStick = new Joystick(0);
@@ -47,8 +50,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //buttons here
-    int i = 0;
+
+  //buttons here
+    final JoystickButton climbUp = new JoystickButton(driverRightStick, 2);
+    
+
+    //button actions here
+    climbUp.whileHeld(new ClimbUp(m_robotClimber));
+
   }
 
   /**
