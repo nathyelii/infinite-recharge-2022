@@ -49,7 +49,7 @@ public final class Constants {
     public static final class ClimberConstants {
 
         public static final int climberChannel = 1; 
-        public static final double climbSpeed = .5;
+        public static final double climbSpeed = .7;
         public static final double climbSpeedStop=0;
     }
 
