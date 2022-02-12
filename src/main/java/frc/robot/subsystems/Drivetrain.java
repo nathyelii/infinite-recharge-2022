@@ -8,8 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.wpilibj.ADIS16448_IMU;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.ADIS16448_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -42,14 +41,12 @@ public class Drivetrain extends SubsystemBase {
 
     private boolean isForward;
 
-    public static ADIS16448_IMU imu = new ADIS16448_IMU();
+    public static ADIS16470_IMU imu = new ADIS16470_IMU();
 
     public Drivetrain() {
         super();
 
         imu.calibrate();
-
-        imu.setYawAxis(IMUAxis.kY);
 
         isForward = true;
 
@@ -95,7 +92,7 @@ public class Drivetrain extends SubsystemBase {
         rightEncoder.setDistancePerPulse(DriveConstants.METERSPERPULSE);
 
         resetEncoders();
-        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(imu.getGyroAngleY()));
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(imu.getAngle()));
     }
 
     /**
@@ -138,7 +135,7 @@ public class Drivetrain extends SubsystemBase {
       }
     
       public double getHeading() {
-        return imu.getGyroAngleY();
+        return imu.getAngle();
       }
     
       public double getTurnRate() {

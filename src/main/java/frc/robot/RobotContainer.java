@@ -12,10 +12,12 @@ import frc.robot.commands.ConveyorDown;
 import frc.robot.commands.ConveyorUp;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeIn;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -29,7 +31,8 @@ public class RobotContainer {
   
   final Drivetrain m_robotDrive = new Drivetrain();
   final Climber m_robotClimber = new Climber();
-  final Conveyor m_robotConveyor = new Conveyor(); 
+  final Conveyor m_robotConveyor = new Conveyor();
+  final Intake m_intake = new Intake();
   
   // The robot's subsystems and commands are defined here...
   private final Joystick driverLeftStick = new Joystick(0);
@@ -59,6 +62,8 @@ public class RobotContainer {
   //buttons here
     final JoystickButton climbUp = new JoystickButton(driverRightStick, 2);
     final JoystickButton climbDown = new JoystickButton(driverLeftStick, 2);
+    final JoystickButton intakeIn = new JoystickButton(driverRightStick, 1);
+    final JoystickButton intakeOut = new JoystickButton(driverLeftStick, 3);
     final JoystickButton conveyorUp = new JoystickButton(driverRightStick, 4);
       final JoystickButton conveyorDown = new JoystickButton(driverLeftStick, 4);
 
@@ -67,6 +72,7 @@ public class RobotContainer {
     climbDown.whileHeld(new ClimbDown(m_robotClimber)); 
      conveyorUp.whileHeld(new ConveyorUp(m_robotConveyor));
      conveyorDown.whileHeld(new ConveyorDown(m_robotConveyor));
+     intakeIn.whileHeld(new IntakeIn(m_intake));
 
   } 
 

@@ -53,8 +53,14 @@ public final class Constants {
         public static final double climbSpeedStop=0;
     }
 
+    public static final class IntakeConstants{ 
+        public static final int intakeCANBUSNUMBER= 4; 
+        public static final double intakeSpeed = .9; 
+        public static final double intakeSpeedStop= 0; 
+    }
+
    public static final class ConveyorConstants{ 
-       public static final int CoveyorCANBUSNUMBER= 4; 
+       public static final int CoveyorCANBUSNUMBER= 5; 
        public static final double conveyorSpeed = .5; 
        public static final double conveyorSpeedStop= 0; 
    }
