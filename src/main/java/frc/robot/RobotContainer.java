@@ -11,6 +11,7 @@ import frc.robot.commands.ClimbUp;
 import frc.robot.commands.ConveyorDown;
 import frc.robot.commands.ConveyorUp;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeIn;
 import frc.robot.subsystems.Climber;
@@ -66,6 +67,7 @@ public class RobotContainer {
     final JoystickButton intakeOut = new JoystickButton(driverLeftStick, 3);
     final JoystickButton conveyorUp = new JoystickButton(driverRightStick, 4);
       final JoystickButton conveyorDown = new JoystickButton(driverLeftStick, 4);
+      final JoystickButton driveStraight = new JoystickButton(copilot, 1);
 
     //button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
@@ -73,6 +75,7 @@ public class RobotContainer {
      conveyorUp.whileHeld(new ConveyorUp(m_robotConveyor));
      conveyorDown.whileHeld(new ConveyorDown(m_robotConveyor));
      intakeIn.whileHeld(new IntakeIn(m_intake));
+     driveStraight.whileHeld(new DriveStraight(m_robotDrive));
 
   } 
 

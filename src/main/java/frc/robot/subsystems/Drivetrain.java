@@ -9,13 +9,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
-import edu.wpi.first.wpilibj.ADIS16448_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.IronMechEncoder;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.IronMechEncoder;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -134,7 +134,7 @@ public class Drivetrain extends SubsystemBase {
         imu.reset();
       }
     
-      public double getHeading() {
+      public double getAngle() {
         return imu.getAngle();
       }
     
@@ -145,6 +145,7 @@ public class Drivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        SmartDashboard.putNumber("average Distance", getAverageEncoderDistance());
     }
 
     @Override

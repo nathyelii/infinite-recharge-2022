@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -45,6 +46,7 @@ public class Drive extends CommandBase {
   @Override
   public void execute() {
     m_drivetrain.arcadeDrive(m_left.getAsDouble(), m_right.getAsDouble());
+    
   }
 
   // Called once the command ends or is interrupted.
