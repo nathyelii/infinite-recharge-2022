@@ -4,13 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import com.revrobotics.ColorSensorV3;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -23,8 +19,7 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
   
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -52,13 +47,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    Color detectedColor = m_colorSensor.getColor();
-    double IR = m_colorSensor.getIR();
 
-    SmartDashboard.putNumber("red", detectedColor.red);
-    SmartDashboard.putNumber("green", detectedColor.green);
-    SmartDashboard.putNumber("blue", detectedColor.blue);
-    SmartDashboard.putNumber("IR", IR);
 
   }
 
