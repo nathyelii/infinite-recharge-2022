@@ -48,8 +48,8 @@ public final class Constants {
     public static final class ShooterConstants {
 
         public static final int SHOOTERCANBUSNUMBER= 6;
-        public static final double climbSpeed = .5;
-        public static final double climbSpeedStop=0;
+        public static final double SHOOTERSPEED = .5;
+        public static final double SHOOTERSPEEDSTOP =0;
     }
 
     public static final class ClimberConstants {
