@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ConveyorConstants;
 
 public class Conveyor extends SubsystemBase {
-    private VictorSPX intakeMotor = new VictorSPX(ConveyorConstants.intakeCANBUSNUMBER); 
-    private VictorSPX elevatorMotor = new VictorSPX(ConveyorConstants.elevatorCANBUSNUMBER);
+    private VictorSPX intakeConveyorMotor = new VictorSPX(ConveyorConstants.intakeConveyorCANBUSNUMBER); 
+    private VictorSPX conveyorMotor = new VictorSPX(ConveyorConstants.conveyorCANBUSNUMBER);
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
     
@@ -21,8 +21,8 @@ public class Conveyor extends SubsystemBase {
     } 
 
     public void set(double value){
-        intakeMotor.set(VictorSPXControlMode.PercentOutput,value);
-        elevatorMotor.set(VictorSPXControlMode.PercentOutput,value); 
+        intakeConveyorMotor.set(VictorSPXControlMode.PercentOutput,value);
+        conveyorMotor.set(VictorSPXControlMode.PercentOutput,value); 
     }
 
     public double readColorSensor (){
