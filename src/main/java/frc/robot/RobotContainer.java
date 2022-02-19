@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
+import frc.robot.commands.ConveyorColor;
 import frc.robot.commands.ConveyorDown;
 import frc.robot.commands.ConveyorUp;
 import frc.robot.commands.Drive;
@@ -28,6 +29,8 @@ import frc.robot.subsystems.Shooter;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+  
   
   final Drivetrain m_robotDrive = new Drivetrain();
   final Climber m_robotClimber = new Climber();
@@ -45,7 +48,7 @@ public class RobotContainer {
 
     m_robotDrive.setDefaultCommand(new Drive(() -> driverLeftStick.getX(),
                 () -> driverRightStick.getY(), m_robotDrive));
-
+    m_robotConveyor.setDefaultCommand(new ConveyorColor(m_robotConveyor));
                 
     // Configure the button bindings
     configureButtonBindings();
@@ -62,15 +65,17 @@ public class RobotContainer {
   //buttons here
     final JoystickButton climbUp = new JoystickButton(driverRightStick, 2);
     final JoystickButton climbDown = new JoystickButton(driverLeftStick, 2);
-    final JoystickButton conveyorUp = new JoystickButton(driverRightStick, 4);
+    final JoystickButton conveyorUp = new JoystickButton(driverLeftStick, 6);
       final JoystickButton conveyorDown = new JoystickButton(driverLeftStick, 4);
+      final JoystickButton conveyorDownSlow = new JoystickButton(driverRightStick, 4);
     final JoystickButton shoot = new JoystickButton(copilot, 1);
 
     //button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
     climbDown.whileHeld(new ClimbDown(m_robotClimber)); 
      conveyorUp.whileHeld(new ConveyorUp(m_robotConveyor));
-     conveyorDown.whileHeld(new ConveyorDown(m_robotConveyor));
+     conveyorDown.whileHeld(new ConveyorDown(m_robotConveyor,1));
+     conveyorDownSlow.whileHeld(new ConveyorDown(m_robotConveyor,0));
     shoot.whileHeld(new Shoot(m_shooter));
 
   } 
