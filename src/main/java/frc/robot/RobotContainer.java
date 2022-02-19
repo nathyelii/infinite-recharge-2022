@@ -12,12 +12,14 @@ import frc.robot.commands.ConveyorDown;
 import frc.robot.commands.ConveyorUp;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,7 +31,8 @@ public class RobotContainer {
   
   final Drivetrain m_robotDrive = new Drivetrain();
   final Climber m_robotClimber = new Climber();
-  final Conveyor m_robotConveyor = new Conveyor(); 
+  final Conveyor m_robotConveyor = new Conveyor();
+  final Shooter m_shooter = new Shooter();
   
   // The robot's subsystems and commands are defined here...
   private final Joystick driverLeftStick = new Joystick(0);
@@ -61,12 +64,14 @@ public class RobotContainer {
     final JoystickButton climbDown = new JoystickButton(driverLeftStick, 2);
     final JoystickButton conveyorUp = new JoystickButton(driverRightStick, 4);
       final JoystickButton conveyorDown = new JoystickButton(driverLeftStick, 4);
+    final JoystickButton shoot = new JoystickButton(copilot, 1);
 
     //button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
     climbDown.whileHeld(new ClimbDown(m_robotClimber)); 
      conveyorUp.whileHeld(new ConveyorUp(m_robotConveyor));
      conveyorDown.whileHeld(new ConveyorDown(m_robotConveyor));
+    shoot.whileHeld(new Shoot(m_shooter));
 
   } 
 
