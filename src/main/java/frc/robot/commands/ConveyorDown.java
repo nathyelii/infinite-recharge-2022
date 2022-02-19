@@ -19,6 +19,8 @@ public class ConveyorDown extends CommandBase {
   @Override
   public void execute() {
       m_conveyor.set(-1*ConveyorConstants.conveyorSpeed);
+      double color= m_conveyor.readColorSensor();
+         SmartDashboard.putNumber("color", color);
   }
 
   // Called once the command ends or is interrupted.

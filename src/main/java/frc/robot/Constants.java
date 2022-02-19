@@ -48,7 +48,7 @@ public final class Constants {
     public static final class ShooterConstants {
 
         public static final int SHOOTERCANBUSNUMBER= 6;
-        public static final double SHOOTERSPEED = .5;
+        public static final double SHOOTERSPEED = -.99;
         public static final double SHOOTERSPEEDSTOP =0;
     }
 
@@ -62,7 +62,7 @@ public final class Constants {
    public static final class ConveyorConstants{ 
        public static final int intakeConveyorCANBUSNUMBER= 4;
        public static final int conveyorCANBUSNUMBER = 5;  
-       public static final double conveyorSpeed = .5; 
+       public static final double conveyorSpeed = 1; 
        public static final double conveyorSpeedStop= 0; 
        public static final int COLORTHRESHOLD = 100;
    }
