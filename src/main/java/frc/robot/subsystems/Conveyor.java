@@ -27,7 +27,7 @@ public class Conveyor extends SubsystemBase {
 
     public void setBothOpposite(double value){
         intakeConveyorMotor.set(VictorSPXControlMode.PercentOutput,value);
-        conveyorMotor.set(VictorSPXControlMode.PercentOutput,-1*value); 
+        conveyorMotor.set(VictorSPXControlMode.PercentOutput,-.7*value); 
     }
 
     public double readColorSensor (){

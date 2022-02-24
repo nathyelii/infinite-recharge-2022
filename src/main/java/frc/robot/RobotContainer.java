@@ -12,6 +12,7 @@ import frc.robot.commands.ConveyorColor;
 import frc.robot.commands.ConveyorDown;
 import frc.robot.commands.ConveyorUp;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriverConveyorUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Climber;
@@ -63,20 +64,20 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
   //buttons here
-    final JoystickButton climbUp = new JoystickButton(driverRightStick, 2);
-    final JoystickButton climbDown = new JoystickButton(driverLeftStick, 2);
-    final JoystickButton conveyorUp = new JoystickButton(driverLeftStick, 6);
-      final JoystickButton conveyorDown = new JoystickButton(driverLeftStick, 4);
-      final JoystickButton conveyorDownSlow = new JoystickButton(driverRightStick, 4);
+    final JoystickButton climbUp = new JoystickButton(driverLeftStick, 5);
+    final JoystickButton climbDown = new JoystickButton(driverLeftStick, 3);
+    final JoystickButton conveyorUp = new JoystickButton(copilot, 11);
+      final JoystickButton driverCollect = new JoystickButton(driverRightStick, 4);
+      final JoystickButton conveyorDownSlow = new JoystickButton(copilot, 10);
     final JoystickButton shoot = new JoystickButton(copilot, 1);
 
     //button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
     climbDown.whileHeld(new ClimbDown(m_robotClimber)); 
      conveyorUp.whileHeld(new ConveyorUp(m_robotConveyor));
-     conveyorDown.whileHeld(new ConveyorDown(m_robotConveyor,1));
+     driverCollect.whileHeld(new DriverConveyorUp(m_robotConveyor));
      conveyorDownSlow.whileHeld(new ConveyorDown(m_robotConveyor,0));
-    shoot.whileHeld(new Shoot(m_shooter));
+    shoot.toggleWhenPressed(new Shoot(m_shooter));
 
   } 
 

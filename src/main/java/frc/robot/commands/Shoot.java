@@ -24,6 +24,8 @@ public class Shoot  extends CommandBase {
     @Override
     public void execute() {
         double value = SmartDashboard.getNumber("shootingSpeed", .50);
+        SmartDashboard.putString("Shooter On", "Yes");
+        SmartDashboard.putNumber("Shooter Speed", m_shooter.getEncoderRate());
         m_shooter.set(-1*value);
     }
 
@@ -31,6 +33,7 @@ public class Shoot  extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         m_shooter.set(ShooterConstants.SHOOTERSPEEDSTOP);
+        SmartDashboard.putString("Shooter On", "No");
     }
 
     // Returns true when the command should end.
