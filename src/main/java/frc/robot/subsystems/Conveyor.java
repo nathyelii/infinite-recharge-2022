@@ -20,14 +20,24 @@ public class Conveyor extends SubsystemBase {
         super();
     } 
 
-    public void set(double value){
+    public void setBoth(double value){
         intakeConveyorMotor.set(VictorSPXControlMode.PercentOutput,value);
         conveyorMotor.set(VictorSPXControlMode.PercentOutput,value); 
+    }
+
+    public void setBothOpposite(double value){
+        intakeConveyorMotor.set(VictorSPXControlMode.PercentOutput,value);
+        conveyorMotor.set(VictorSPXControlMode.PercentOutput,-.7*value); 
     }
 
     public double readColorSensor (){
         Color detectedColor = m_colorSensor.getColor();
         return detectedColor.red- detectedColor.blue; 
+    }
+
+    public int readDistanceSensor (){
+         int distnace = m_colorSensor.getProximity();
+        return distnace; 
     }
 
 
