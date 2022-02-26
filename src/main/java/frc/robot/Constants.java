@@ -67,6 +67,27 @@ public final class Constants {
        public static final int COLORTHRESHOLD = 100;
    }
 
+   public static final class AutoConstants {
+        public static final double CENTIMETER = 1;
+        public static final double METER = 100;
+        public static final double SECON = 1;
+        public static final double kMaxSpeedMetersPerSecond = .4;
+    public static final double kMaxAccelerationMetersPerSecondSquared = .4;
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
+
+    public static final String DOUBLECARGOLOWLOW = "a";
+    public static final String DOUBLECARGOLOWHIGH = "b";
+    public static final String JUSTMOVE = "c";
+    public static final String SINGLECARGOLOW = "d"; 
+    public static final String SINGLECARGOHIGH = "e"; 
+    public static final String DOUBLECARGOLOWLOWSETUP = "f"; 
+    public static final String DOUBLECARGOHIGHHIGH = "g"; 
+
+      }
+
+
+
     public static final class DriveConstants {
 
         // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!

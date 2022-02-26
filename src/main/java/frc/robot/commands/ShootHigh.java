@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.Shooter;
 
-public class Shoot  extends CommandBase {
+public class ShootHigh extends CommandBase {
     private final Shooter m_shooter;
 
-    public Shoot (Shooter shooter){
+    public ShootHigh (Shooter shooter){
         super();
         m_shooter = shooter;
         addRequirements(m_shooter);
@@ -23,7 +23,7 @@ public class Shoot  extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double value = SmartDashboard.getNumber("shootingSpeed", .1000);
+        double value = SmartDashboard.getNumber("shootingSpeed", .95);
         SmartDashboard.putString("Shooter On", "Yes");
         SmartDashboard.putNumber("Shooter Speed", m_shooter.getEncoderRate());
         m_shooter.set(-1*value);
