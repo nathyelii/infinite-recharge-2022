@@ -46,7 +46,9 @@ public final class Constants {
     public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
 
     public static final class ShooterConstants {
-
+        
+        public static final double LOWGOALSPEED = 35.0;
+        public static final double HIGHGOALSPEED = 63.0;
         public static final int SHOOTERCANBUSNUMBER= 6;
         public static final double SHOOTERSPEED = -.99;
         public static final double SHOOTERSPEEDSTOP =0;
@@ -55,6 +57,7 @@ public final class Constants {
     public static final class ClimberConstants {
 
         public static final int climberChannel = 7; 
+        public static final int WINDOWMOTORCANBUSNUMBER = 8; 
         public static final double climbSpeed = .7;
         public static final double climbSpeedStop=0;
     }
