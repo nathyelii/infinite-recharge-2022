@@ -32,9 +32,10 @@ import frc.robot.commands.Drive;
 import frc.robot.commands.DriverConveyorUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
-import frc.robot.commands.ShootAtSpeed;
+import frc.robot.commands.WarmUpShooter;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.AutoShoot;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
@@ -95,11 +96,12 @@ public class RobotContainer {
     // buttons here
     final JoystickButton climbUp = new JoystickButton(driverLeftStick, 5);
     final JoystickButton climbDown = new JoystickButton(driverLeftStick, 3);
-    final JoystickButton conveyorUp = new JoystickButton(copilot, 11);
+    final JoystickButton conveyorUp = new JoystickButton(copilot, 6);
+    final JoystickButton conveyorUpTrigger = new JoystickButton(copilot, 1);
     final JoystickButton driverCollect = new JoystickButton(driverRightStick, 4);
-    final JoystickButton conveyorDownSlow = new JoystickButton(copilot, 10);
-    final JoystickButton shoot = new JoystickButton(copilot, 1);
-    final JoystickButton shootStop = new JoystickButton(driverRightStick, 1);
+    final JoystickButton conveyorDownSlow = new JoystickButton(copilot, 7);
+    final JoystickButton shootHigh = new JoystickButton(copilot, 3);
+    final JoystickButton shootLow= new JoystickButton(copilot, 2);
 
     // button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
@@ -107,8 +109,9 @@ public class RobotContainer {
     conveyorUp.whileHeld(new ConveyorUp(m_robotConveyor));
     driverCollect.whileHeld(new DriverConveyorUp(m_robotConveyor));
     conveyorDownSlow.whileHeld(new ConveyorDown(m_robotConveyor, 0));
-    shoot.toggleWhenPressed(new ShootAtSpeed(m_shooter, SmartDashboard.getNumber("shootingSpeed", .1000)));
-    shootStop.toggleWhenPressed(new Shoot(m_shooter));
+    shootHigh.whileHeld(new Shoot(m_shooter, ShooterConstants.HIGHGOALSPEED));
+    shootLow.whileHeld(new Shoot(m_shooter, ShooterConstants.LOWGOALSPEED));
+    conveyorUpTrigger.whileHeld(new ConveyorUp(m_robotConveyor));
 
   }
 

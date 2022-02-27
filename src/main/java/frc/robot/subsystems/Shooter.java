@@ -25,7 +25,7 @@ public class Shooter extends SubsystemBase  {
         encoder.setMinRate(10);
 
         // Reverses the direction of the encoder
-        encoder.setReverseDirection(false);
+        encoder.setReverseDirection(true);
 
         // Configures an encoder to average its period measurement over 5 samples
         // Can be between 1 and 127 samples
