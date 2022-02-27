@@ -39,8 +39,6 @@ public class Robot extends TimedRobot {
   @Override
 
   public void robotInit() {
-    SmartDashboard.putNumber("shootingSpeed", 1);
-
     autoChooser.setDefaultOption("Double cargo low low",AutoConstants.DOUBLECARGOLOWLOW);
     autoChooser.addOption("Double cargo low high",AutoConstants.DOUBLECARGOLOWHIGH);
     SmartDashboard.putData("Auto Options", autoChooser);

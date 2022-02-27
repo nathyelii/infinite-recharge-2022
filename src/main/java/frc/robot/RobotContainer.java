@@ -33,6 +33,7 @@ import frc.robot.commands.DriverConveyorUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.WarmUpShooter;
+import frc.robot.commands.Window;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -95,12 +96,15 @@ public class RobotContainer {
     // buttons here
     final JoystickButton climbUp = new JoystickButton(driverLeftStick, 5);
     final JoystickButton climbDown = new JoystickButton(driverLeftStick, 3);
+    final JoystickButton windowUp = new JoystickButton(driverRightStick, 5);
+    final JoystickButton windowDown = new JoystickButton(driverRightStick, 3);
     final JoystickButton conveyorUp = new JoystickButton(copilot, 6);
     final JoystickButton conveyorUpTrigger = new JoystickButton(copilot, 1);
     final JoystickButton driverCollect = new JoystickButton(driverRightStick, 4);
     final JoystickButton conveyorDownSlow = new JoystickButton(copilot, 7);
     final JoystickButton shootHigh = new JoystickButton(copilot, 3);
     final JoystickButton shootLow= new JoystickButton(copilot, 2);
+    final JoystickButton reverseLockerButton= new JoystickButton(driverRightStick, 3);
 
     // button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
@@ -111,6 +115,9 @@ public class RobotContainer {
     shootHigh.whileHeld(new Shoot(m_shooter, ShooterConstants.HIGHGOALSPEED));
     shootLow.whileHeld(new Shoot(m_shooter, ShooterConstants.LOWGOALSPEED));
     conveyorUpTrigger.whileHeld(new ConveyorUp(m_robotConveyor));
+    windowUp.whileHeld(new Window(m_robotClimber, .25));
+    windowDown.whileHeld(new Window(m_robotClimber, -.25));
+    //reverseLockerButton.whileHeld();
 
   }
 

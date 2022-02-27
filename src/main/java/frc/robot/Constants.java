@@ -58,7 +58,7 @@ public final class Constants {
 
         public static final int climberChannel = 7; 
         public static final int WINDOWMOTORCANBUSNUMBER = 8; 
-        public static final double climbSpeed = .7;
+        public static final double climbSpeed = .95;
         public static final double climbSpeedStop=0;
     }
 

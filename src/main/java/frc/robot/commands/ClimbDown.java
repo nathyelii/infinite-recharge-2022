@@ -26,7 +26,8 @@ public class ClimbDown extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-      m_climber.set(ClimberConstants.climbSpeedStop); 
+      m_climber.setBoth(ClimberConstants.climbSpeedStop); 
+      m_climber.setWindowMotor(1); 
   }
 
   // Returns true when the command should end.

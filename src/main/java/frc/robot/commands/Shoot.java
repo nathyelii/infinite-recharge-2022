@@ -12,17 +12,18 @@ public class Shoot  extends CommandBase {
     BangBangController controller;
     
 
-    public Shoot (Shooter shooter, double speed){
+    public Shoot (Shooter shooter, double goalSpeed){
         super();
         m_shooter = shooter;
         addRequirements(m_shooter);
-        SmartDashboard.putNumber("goalSpeed", goalSpeed);
+        this.goalSpeed = goalSpeed;
         controller = new BangBangController();
 
     }
 
     @Override
     public void initialize() {
+        SmartDashboard.putNumber("goalSpeed", goalSpeed);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

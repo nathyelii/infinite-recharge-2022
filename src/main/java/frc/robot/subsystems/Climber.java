@@ -13,11 +13,15 @@ public class Climber extends SubsystemBase  {
 
     public Climber (){
         super(); 
-        climberMotor.setInverted(true);
+        // climberMotor.setInverted(true);
     }
 
-    public void set(double value){
+    public void setClimberMotor(double value){
         climberMotor.set(VictorSPXControlMode.PercentOutput,value);
+    }
+
+    public void setWindowMotor(double value){
+        windowMotor.set(VictorSPXControlMode.PercentOutput,value);
     }
 
     public void setBoth(double value){

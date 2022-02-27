@@ -31,9 +31,8 @@ public class DoubleCargoLowLow extends SequentialCommandGroup {
                                 RobotContainer.followPath(m_robotDrive, Robot.forward).deadlineWith(
                                                 new ConveyorUp(conveyor)),
                                 new ConveyorDown(conveyor, 0).withTimeout(.5),
-                                RobotContainer.followPath(m_robotDrive, Robot.                                                RobotContainer.followPath(m_robotDrive, Robot.backward),
-                                ).deadlineWith(
-                                        new WarmUpShooter(shooter, 50)),
+                                RobotContainer.followPath(m_robotDrive, Robot.backward)
+                                                .deadlineWith(new WarmUpShooter(shooter, 50)),
                                 new ParallelCommandGroup(
                                                 new Shoot(shooter, ShooterConstants.LOWGOALSPEED).withTimeout(2.0),
                                                 new ConveyorUp(conveyor).withTimeout(2.0)));
