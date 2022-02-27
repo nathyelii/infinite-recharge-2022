@@ -58,7 +58,8 @@ public final class Constants {
 
         public static final int climberChannel = 7; 
         public static final int WINDOWMOTORCANBUSNUMBER = 8; 
-        public static final double climbSpeed = .95;
+        public static final double CLIMBSPEEDDOWN = .7;
+        public static final double CLIMBSPEEDUP = 1;
         public static final double climbSpeedStop=0;
     }
 
@@ -86,6 +87,7 @@ public final class Constants {
     public static final String SINGLECARGOHIGH = "e"; 
     public static final String DOUBLECARGOLOWLOWSETUP = "f"; 
     public static final String DOUBLECARGOHIGHHIGH = "g"; 
+    public static final String SIMPLEAUTO = "h"; 
 
       }
 

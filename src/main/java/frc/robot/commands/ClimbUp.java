@@ -22,7 +22,7 @@ public class ClimbUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_climber.setClimberMotor(ClimberConstants.climbSpeed);
+      m_climber.setClimberMotor(ClimberConstants.CLIMBSPEEDUP);
   }
 
   // Called once the command ends or is interrupted.

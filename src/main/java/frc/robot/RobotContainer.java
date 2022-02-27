@@ -34,6 +34,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.WarmUpShooter;
 import frc.robot.commands.Window;
+import frc.robot.commands.SimpleAuto;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -127,17 +128,18 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand(String autoMode) {
-    return RobotContainer.followPath(m_robotDrive, Robot.forward);
-    // autoMode = AutoConstants.DOUBLECARGOLOWLOW;
+    autoMode = AutoConstants.DOUBLECARGOLOWLOW;
 
-    // switch (autoMode) {
-    //   case AutoConstants.DOUBLECARGOLOWLOW:
-    //       return new DoubleCargoLowLow(m_shooter, m_robotConveyor, m_robotDrive);
-    //   case AutoConstants.DOUBLECARGOLOWHIGH:
-    //       return new DoubleCargoLowHigh(m_shooter, m_robotConveyor, m_robotDrive);
-    // }
+    switch (autoMode) {
+      case AutoConstants.DOUBLECARGOLOWLOW:
+          return new DoubleCargoLowLow(m_shooter, m_robotConveyor, m_robotDrive);
+      case AutoConstants.DOUBLECARGOLOWHIGH:
+          return new DoubleCargoLowHigh(m_shooter, m_robotConveyor, m_robotDrive);
+      case AutoConstants.SIMPLEAUTO:
+        return new SimpleAuto(m_shooter, m_robotConveyor, m_robotDrive);
+    }
 
-    //   return null;
+      return null;
     }
 
 

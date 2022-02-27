@@ -20,14 +20,15 @@ public class ClimbDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_climber.setBoth(-1*ClimberConstants.climbSpeed);
+      m_climber.setBoth(-1*ClimberConstants.CLIMBSPEEDDOWN);
+      m_climber.setWindowMotor(1);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
       m_climber.setBoth(ClimberConstants.climbSpeedStop); 
-      m_climber.setWindowMotor(1); 
+       
   }
 
   // Returns true when the command should end.
