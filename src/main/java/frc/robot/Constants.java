@@ -48,7 +48,7 @@ public final class Constants {
     public static final class ShooterConstants {
         
         public static final double LOWGOALSPEED = 35.0;
-        public static final double HIGHGOALSPEED = 63.0;
+        public static final double HIGHGOALSPEED = 68.0;
         public static final int SHOOTERCANBUSNUMBER= 6;
         public static final double SHOOTERSPEED = -.99;
         public static final double SHOOTERSPEEDSTOP =0;
@@ -88,6 +88,9 @@ public final class Constants {
     public static final String DOUBLECARGOLOWLOWSETUP = "f"; 
     public static final String DOUBLECARGOHIGHHIGH = "g"; 
     public static final String SIMPLEAUTO = "h"; 
+    public static final String DRIVE = "i";
+    public static final String SIMPLEAUTOLOWLOW = "j";  
+    public static final String SIMPLEAUTOHIGHHIGH = "k";  
 
       }
 

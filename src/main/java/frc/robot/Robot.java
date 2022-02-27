@@ -5,6 +5,9 @@
 package frc.robot;
 
 
+import java.io.File;
+import java.io.IOException;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
@@ -39,7 +42,10 @@ public class Robot extends TimedRobot {
   @Override
 
   public void robotInit() {
-    autoChooser.setDefaultOption("Simple Auto",AutoConstants.SIMPLEAUTO);
+    autoChooser.setDefaultOption("Drive",AutoConstants.DRIVE);
+    autoChooser.addOption("Simple Auto",AutoConstants.SIMPLEAUTO);
+    autoChooser.addOption("Simple Auto Double Low",AutoConstants.SIMPLEAUTOLOWLOW);
+    autoChooser.addOption("Simple Auto Double High",AutoConstants.SIMPLEAUTOHIGHHIGH);
     autoChooser.addOption("Double cargo low low",AutoConstants.DOUBLECARGOLOWLOW);
     autoChooser.addOption("Double cargo low high",AutoConstants.DOUBLECARGOLOWHIGH);
     SmartDashboard.putData("Auto Options", autoChooser);

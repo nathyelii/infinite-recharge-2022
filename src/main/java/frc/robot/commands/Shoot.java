@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import java.util.Arrays;
+
 import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -10,6 +12,9 @@ public class Shoot  extends CommandBase {
     private final Shooter m_shooter;
     private double goalSpeed;
     BangBangController controller;
+    int index =0;
+    double[] history;
+    int rollingAverageSize;
     
 
     public Shoot (Shooter shooter, double goalSpeed){
@@ -18,12 +23,17 @@ public class Shoot  extends CommandBase {
         addRequirements(m_shooter);
         this.goalSpeed = goalSpeed;
         controller = new BangBangController();
+        rollingAverageSize = 5;
 
     }
 
     @Override
     public void initialize() {
+        SmartDashboard.delete("CanShoot");
         SmartDashboard.putNumber("goalSpeed", goalSpeed);
+        history = new double[rollingAverageSize];
+        index=0;
+        SmartDashboard.putString("CanShoot", "DON'T SHOOT");
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -32,8 +42,21 @@ public class Shoot  extends CommandBase {
         goalSpeed = SmartDashboard.getNumber("goalSpeed", 0);
         SmartDashboard.putString("Shooter On", "Yes");
         double speed = controller.calculate(m_shooter.getEncoderRate(), goalSpeed);
-        SmartDashboard.putNumber("Shooter Speed", speed);
+        SmartDashboard.putNumber("Shooter Speed", m_shooter.getEncoderRate());
         m_shooter.set(speed);
+        history[++index%rollingAverageSize] = m_shooter.getEncoderRate();
+        double total = Arrays.stream(history).sum();
+        double average = total/rollingAverageSize;
+        if (Math.abs(average - goalSpeed) > 5)
+        {
+            SmartDashboard.putString("CanShoot", "SHOOT");
+        } 
+        else{
+            SmartDashboard.delete("CanShoot");
+        }
+
+
+        
     }
 
     // Called once the command ends or is interrupted.
@@ -41,6 +64,8 @@ public class Shoot  extends CommandBase {
     public void end(boolean interrupted) {
         m_shooter.set(ShooterConstants.SHOOTERSPEEDSTOP);
         SmartDashboard.putString("Shooter On", "No");
+        SmartDashboard.delete("CanShoot");
+        SmartDashboard.putString("CanShoot", "DON'T SHOOT");
     }
 
     // Returns true when the command should end.

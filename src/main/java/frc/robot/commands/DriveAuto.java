@@ -34,7 +34,7 @@ public class DriveAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.arcadeDrive(speed, 0);
+    m_drivetrain.arcadeDrive(0, speed);
     m_drivetrain.log();
   }
 

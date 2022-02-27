@@ -53,12 +53,12 @@ public class WarmUpShooter extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        double total = Arrays.stream(history).sum();
-        double average = total/rollingAverageSize;
-        if (average - goalSpeed > 0)
-        {
-            return true;
-        } 
+        // double total = Arrays.stream(history).sum();
+        // double average = total/rollingAverageSize;
+        // if (average - goalSpeed > 0)
+        // {
+        //     return true;
+        // } 
         return false;
     }
 }

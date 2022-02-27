@@ -29,12 +29,15 @@ import frc.robot.commands.ConveyorUp;
 import frc.robot.commands.DoubleCargoLowHigh;
 import frc.robot.commands.DoubleCargoLowLow;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveAuto;
 import frc.robot.commands.DriverConveyorUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.WarmUpShooter;
 import frc.robot.commands.Window;
 import frc.robot.commands.SimpleAuto;
+import frc.robot.commands.SimpleAutoHighHigh;
+import frc.robot.commands.SimpleAutoLowLow;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -104,8 +107,8 @@ public class RobotContainer {
     final JoystickButton driverCollect = new JoystickButton(driverRightStick, 4);
     final JoystickButton conveyorDownSlow = new JoystickButton(copilot, 7);
     final JoystickButton shootHigh = new JoystickButton(copilot, 3);
-    final JoystickButton shootLow= new JoystickButton(copilot, 2);
-    final JoystickButton reverseLockerButton= new JoystickButton(driverRightStick, 3);
+    final JoystickButton shootLow = new JoystickButton(copilot, 2);
+    final JoystickButton reverseLockerButton = new JoystickButton(driverRightStick, 3);
 
     // button actions here
     climbUp.whileHeld(new ClimbUp(m_robotClimber));
@@ -118,7 +121,7 @@ public class RobotContainer {
     conveyorUpTrigger.whileHeld(new ConveyorUp(m_robotConveyor));
     windowUp.whileHeld(new Window(m_robotClimber, .25));
     windowDown.whileHeld(new Window(m_robotClimber, -.25));
-    //reverseLockerButton.whileHeld();
+    // reverseLockerButton.whileHeld();
 
   }
 
@@ -128,38 +131,47 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand(String autoMode) {
-    autoMode = AutoConstants.DOUBLECARGOLOWLOW;
-
+    SmartDashboard.putString("AutoMode", "NONE");
     switch (autoMode) {
-      case AutoConstants.DOUBLECARGOLOWLOW:
-          return new DoubleCargoLowLow(m_shooter, m_robotConveyor, m_robotDrive);
-      case AutoConstants.DOUBLECARGOLOWHIGH:
-          return new DoubleCargoLowHigh(m_shooter, m_robotConveyor, m_robotDrive);
       case AutoConstants.SIMPLEAUTO:
+        SmartDashboard.putString("AutoMode", "SIMPLEAUTO");
         return new SimpleAuto(m_shooter, m_robotConveyor, m_robotDrive);
+      case AutoConstants.DRIVE:
+        SmartDashboard.putString("AutoMode", "DRIVE");
+        return new DriveAuto(1, m_robotDrive).withTimeout(3.0);
+      case AutoConstants.DOUBLECARGOLOWLOW:
+        SmartDashboard.putString("AutoMode", "DOUBLECARGOLOWLOW");
+        return new DoubleCargoLowLow(m_shooter, m_robotConveyor, m_robotDrive);
+      case AutoConstants.DOUBLECARGOLOWHIGH:
+        SmartDashboard.putString("AutoMode", "DOUBLECARGOLOWHIGH");
+        return new DoubleCargoLowHigh(m_shooter, m_robotConveyor, m_robotDrive);
+      case AutoConstants.SIMPLEAUTOLOWLOW:
+        SmartDashboard.putString("AutoMode", "SIMPLEAUTOLOWLOW");
+        return new SimpleAutoLowLow(m_shooter, m_robotConveyor, m_robotDrive);
+        case AutoConstants.SIMPLEAUTOHIGHHIGH:
+        SmartDashboard.putString("AutoMode", "SIMPLEAUTOHIGHHIGH");
+        return new SimpleAutoHighHigh(m_shooter, m_robotConveyor, m_robotDrive);
     }
 
-      return null;
-    }
+    return null;
+  }
 
-
-  public static RamseteCommand followPath(Drivetrain m_robotDrive, Trajectory path)
-  {
+  public static RamseteCommand followPath(Drivetrain m_robotDrive, Trajectory path) {
     System.out.println("In follow Path");
     return new RamseteCommand(
-      path,
-      m_robotDrive::getPose,
-      new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
-      new SimpleMotorFeedforward(
-              DriveConstants.ksVolts,
-              DriveConstants.kvVoltSecondsPerMeter,
-              DriveConstants.kaVoltSecondsSquaredPerMeter),
-      DriveConstants.kDriveKinematics,
-      m_robotDrive::getWheelSpeeds,
-      new PIDController(DriveConstants.kPDriveVel, 0, 0),
-      new PIDController(DriveConstants.kPDriveVel, 0, 0),
-      // RamseteCommand passes volts to the callback
-      m_robotDrive::tankDriveVolts,
-      m_robotDrive);
+        path,
+        m_robotDrive::getPose,
+        new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
+        new SimpleMotorFeedforward(
+            DriveConstants.ksVolts,
+            DriveConstants.kvVoltSecondsPerMeter,
+            DriveConstants.kaVoltSecondsSquaredPerMeter),
+        DriveConstants.kDriveKinematics,
+        m_robotDrive::getWheelSpeeds,
+        new PIDController(DriveConstants.kPDriveVel, 0, 0),
+        new PIDController(DriveConstants.kPDriveVel, 0, 0),
+        // RamseteCommand passes volts to the callback
+        m_robotDrive::tankDriveVolts,
+        m_robotDrive);
   }
 }

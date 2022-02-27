@@ -10,23 +10,23 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 
 public class SimpleAuto extends SequentialCommandGroup {
-    public SimpleAuto(Shooter shooter, Conveyor conveyor, Drivetrain m_robotDrive) {
-        addCommands(
-                new WarmUpShooter(shooter, 50).withTimeout(5.0),
-                new ParallelCommandGroup(
-                        new Shoot(shooter, ShooterConstants.LOWGOALSPEED).withTimeout(2.0),
-                        new ConveyorUp(conveyor).withTimeout(2.0)),
-                new ParallelCommandGroup(
-                        new DriveAuto(.25, m_robotDrive).withTimeout(3.0),
-                        new ConveyorUp(conveyor).withTimeout(3.0)),
-                new ConveyorDown(conveyor, 0).withTimeout(.5),
-                new WarmUpShooter(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(5.0),
-                new ParallelCommandGroup(
-                        new Shoot(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(2.0),
-                        new ConveyorUp(conveyor).withTimeout(2.0)),
-                new ParallelCommandGroup(
-                    new DriveAuto(-.25, m_robotDrive).withTimeout(3.0),
-                        new WarmUpShooter(shooter, 50).withTimeout(5.0)));
-    }
+        public SimpleAuto(Shooter shooter, Conveyor conveyor, Drivetrain m_robotDrive) {
+                addCommands(
+                                new Shoot(shooter, ShooterConstants.LOWGOALSPEED).withTimeout(2.0),
+                                new ParallelCommandGroup(
+                                                new Shoot(shooter, ShooterConstants.LOWGOALSPEED).withTimeout(2.5),
+                                                new ConveyorUp(conveyor).withTimeout(1.0)),
+                                new ParallelCommandGroup(
+                                                new DriveAuto(-.75, m_robotDrive).withTimeout(2.25),
+                                                new ConveyorUp(conveyor).withTimeout(3)),
+                                new ParallelCommandGroup(
+                                                new ConveyorDown(conveyor, 0).withTimeout(.25),
+                                                new DriveAuto(.75, m_robotDrive).withTimeout(.9),
+                                                new WarmUpShooter(shooter, ShooterConstants.HIGHGOALSPEED)
+                                                                .withTimeout(3.0)),
+                                new ParallelCommandGroup(
+                                                new Shoot(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(3.0),
+                                                new ConveyorUp(conveyor).withTimeout(3.0)));
+        }
 
 }
