@@ -1,25 +1,16 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-import java.util.function.DoubleSupplier;
 
-public class Drive extends CommandBase {
-
-
-  private final Drivetrain m_drivetrain;
-  private final DoubleSupplier m_left;
-  private final DoubleSupplier m_right;
+public class DriveAuto extends CommandBase {
 
 
+    private final Drivetrain m_drivetrain;
+    private final double speed;
+
+    
   /**
    * Creates a new TankDrive command.
    *
@@ -27,11 +18,10 @@ public class Drive extends CommandBase {
    * @param right      The control input for the right sight of the drive
    * @param drivetrain The drivetrain subsystem to drive
    */
-  public Drive(DoubleSupplier left, DoubleSupplier right, Drivetrain drivetrain) {
+  public DriveAuto(double speed, Drivetrain drivetrain) {
     super();
     m_drivetrain = drivetrain;
-    m_left = left;
-    m_right = right;
+    this.speed = speed;
     addRequirements(m_drivetrain);
   }
 
@@ -44,7 +34,7 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.arcadeDrive(m_left.getAsDouble(), m_right.getAsDouble());
+    m_drivetrain.arcadeDrive(0, speed);
     m_drivetrain.log();
   }
 
@@ -59,4 +49,5 @@ public class Drive extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+    
 }

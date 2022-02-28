@@ -46,7 +46,9 @@ public final class Constants {
     public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
 
     public static final class ShooterConstants {
-
+        
+        public static final double LOWGOALSPEED = 35.0;
+        public static final double HIGHGOALSPEED = 68.0;
         public static final int SHOOTERCANBUSNUMBER= 6;
         public static final double SHOOTERSPEED = -.99;
         public static final double SHOOTERSPEEDSTOP =0;
@@ -55,7 +57,9 @@ public final class Constants {
     public static final class ClimberConstants {
 
         public static final int climberChannel = 7; 
-        public static final double climbSpeed = .7;
+        public static final int WINDOWMOTORCANBUSNUMBER = 8; 
+        public static final double CLIMBSPEEDDOWN = .7;
+        public static final double CLIMBSPEEDUP = 1;
         public static final double climbSpeedStop=0;
     }
 
@@ -66,6 +70,31 @@ public final class Constants {
        public static final double conveyorSpeedStop= 0; 
        public static final int COLORTHRESHOLD = 100;
    }
+
+   public static final class AutoConstants {
+        public static final double CENTIMETER = 1;
+        public static final double METER = 100;
+        public static final double SECON = 1;
+        public static final double kMaxSpeedMetersPerSecond = .4;
+    public static final double kMaxAccelerationMetersPerSecondSquared = .4;
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
+
+    public static final String DOUBLECARGOLOWLOW = "a";
+    public static final String DOUBLECARGOLOWHIGH = "b";
+    public static final String JUSTMOVE = "c";
+    public static final String SINGLECARGOLOW = "d"; 
+    public static final String SINGLECARGOHIGH = "e"; 
+    public static final String DOUBLECARGOLOWLOWSETUP = "f"; 
+    public static final String DOUBLECARGOHIGHHIGH = "g"; 
+    public static final String SIMPLEAUTO = "h"; 
+    public static final String DRIVE = "i";
+    public static final String SIMPLEAUTOLOWLOW = "j";  
+    public static final String SIMPLEAUTOHIGHHIGH = "k";  
+
+      }
+
+
 
     public static final class DriveConstants {
 

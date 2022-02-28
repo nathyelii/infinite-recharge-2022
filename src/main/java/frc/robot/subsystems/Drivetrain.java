@@ -6,13 +6,16 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.ADIS16448_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.IronMechEncoder;
@@ -110,6 +113,15 @@ public class Drivetrain extends SubsystemBase {
         rightFather.setVoltage(rightVolts);
     }
 
+    public void resetOdometry(Pose2d pose) {
+      resetEncoders();
+      m_odometry.resetPosition(pose, Rotation2d.fromDegrees(imu.getGyroAngleY()));
+    }
+
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+      return new DifferentialDriveWheelSpeeds(leftEncoder.getRate(), rightEncoder.getRate());
+    }
+
     /**
      * Tank style driving for the DriveTrain.
      *
@@ -143,6 +155,18 @@ public class Drivetrain extends SubsystemBase {
     
       public double getTurnRate() {
         return -imu.getRate();
+      }
+
+      public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
+      }
+
+      public void log(){
+        SmartDashboard.putNumber("Left Speed", leftEncoder.getRate());
+        SmartDashboard.putNumber("Right Speed", rightEncoder.getRate());
+        SmartDashboard.putNumber("Left Distance", leftEncoder.getDistance());
+        SmartDashboard.putNumber("Right Distance", rightEncoder.getDistance());
+        SmartDashboard.putNumber("Heading",getHeading());
       }
 
     @Override

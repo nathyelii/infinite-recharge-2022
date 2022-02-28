@@ -9,12 +9,23 @@ import frc.robot.Constants.ClimberConstants;
 public class Climber extends SubsystemBase  {
 
     private VictorSPX climberMotor = new VictorSPX(ClimberConstants.climberChannel);
+    private VictorSPX windowMotor = new VictorSPX(ClimberConstants.WINDOWMOTORCANBUSNUMBER);
 
     public Climber (){
         super(); 
+        // climberMotor.setInverted(true);
     }
 
-    public void set(double value){
+    public void setClimberMotor(double value){
+        climberMotor.set(VictorSPXControlMode.PercentOutput,value);
+    }
+
+    public void setWindowMotor(double value){
+        windowMotor.set(VictorSPXControlMode.PercentOutput,value);
+    }
+
+    public void setBoth(double value){
+        windowMotor.set(VictorSPXControlMode.PercentOutput,value);
         climberMotor.set(VictorSPXControlMode.PercentOutput,value);
     }
     

@@ -15,7 +15,8 @@ public class Shooter extends SubsystemBase  {
     public Shooter (){
         super();
         encoder = new Encoder(1, 2, false, Encoder.EncodingType.k4X);
-        encoder.setDistancePerPulse(2048);
+        encoder.setDistancePerPulse(1.0/2048);
+        shooterMotor.setInverted(true);
         
         // Configures the encoder to consider itself stopped after .1 seconds
         encoder.setMaxPeriod(.1);
