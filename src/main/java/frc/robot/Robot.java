@@ -34,7 +34,6 @@ public class Robot extends TimedRobot {
   public static Trajectory backward;
 
 
-  private CameraServer server;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
