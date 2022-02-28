@@ -6,10 +6,10 @@ import frc.robot.Constants.ConveyorConstants;
 import frc.robot.subsystems.Conveyor;
 
 public class DriverConveyorUp extends CommandBase {
-    private final Conveyor m_conveyor; 
+    private final Conveyor m_conveyor;
     public DriverConveyorUp (Conveyor conveyor){
         super();
-        m_conveyor = conveyor; 
+        m_conveyor = conveyor;
         addRequirements(m_conveyor);
     }
 
@@ -20,15 +20,13 @@ public class DriverConveyorUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double color= m_conveyor.readColorSensor();
-         SmartDashboard.putNumber("color", color);
-      m_conveyor.setBothOpposite(ConveyorConstants.conveyorSpeed);
+      m_conveyor.setBothOpposite(ConveyorConstants.CONVEYOR_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-      m_conveyor.setBothOpposite(ConveyorConstants.conveyorSpeedStop); 
+      m_conveyor.setBothOpposite(ConveyorConstants.CONVEYOR_STOP_SPEED);
   }
 
   // Returns true when the command should end.

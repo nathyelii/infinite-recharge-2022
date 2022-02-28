@@ -2,8 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
@@ -14,9 +12,9 @@ public class SimpleAutoHighHigh extends SequentialCommandGroup {
         addCommands(
                 new ParallelCommandGroup(
                         new DriveAuto(-.75, m_robotDrive).withTimeout(.25),
-                        new Shoot(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(2.0)),
+                        new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED).withTimeout(2.0)),
                 new ParallelCommandGroup(
-                        new Shoot(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(2.5),
+                        new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED).withTimeout(2.5),
                         new ConveyorUp(conveyor).withTimeout(1.0)),
                 new ParallelCommandGroup(
                         new DriveAuto(-.75, m_robotDrive).withTimeout(1),
@@ -25,10 +23,10 @@ public class SimpleAutoHighHigh extends SequentialCommandGroup {
                 new ParallelCommandGroup(
                         new SequentialCommandGroup(
                                 new ConveyorDown(conveyor, 0).withTimeout(.25),
-                                new WarmUpShooter(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(2.0),
+                                new WarmUpShooter(shooter, ShooterConstants.HIGH_GOAL_SPEED).withTimeout(2.0),
                                 new DriveAuto(.75, m_robotDrive).withTimeout(.9))),
                 new ParallelCommandGroup(
-                        new Shoot(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(3.0),
+                        new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED).withTimeout(3.0),
                         new ConveyorUp(conveyor).withTimeout(3.0)));
     }
 

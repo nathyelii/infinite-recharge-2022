@@ -10,41 +10,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ConveyorConstants;
 
 public class Conveyor extends SubsystemBase {
-    private VictorSPX intakeConveyorMotor = new VictorSPX(ConveyorConstants.intakeConveyorCANBUSNUMBER); 
-    private VictorSPX conveyorMotor = new VictorSPX(ConveyorConstants.conveyorCANBUSNUMBER);
-    private final I2C.Port i2cPort = I2C.Port.kOnboard;
-    private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-    
+    private VictorSPX intakeConveyorMotor = new VictorSPX(ConveyorConstants.INTAKE_CONVEYOR_CANBUS_NUMBER);
+    private VictorSPX conveyorMotor = new VictorSPX(ConveyorConstants.CONVEYOR_CANBUS_NUMBER);
+
     public Conveyor (){
         super();
-    } 
+    }
 
     public void setBoth(double value){
         intakeConveyorMotor.set(VictorSPXControlMode.PercentOutput,value);
-        conveyorMotor.set(VictorSPXControlMode.PercentOutput,value); 
+        conveyorMotor.set(VictorSPXControlMode.PercentOutput,value);
     }
 
     public void setBothOpposite(double value){
         intakeConveyorMotor.set(VictorSPXControlMode.PercentOutput,value);
-        conveyorMotor.set(VictorSPXControlMode.PercentOutput,-.7*value); 
-    }
-
-    public double readColorSensor (){
-        Color detectedColor = m_colorSensor.getColor();
-        return detectedColor.red- detectedColor.blue; 
-    }
-
-    public int readDistanceSensor (){
-         int distnace = m_colorSensor.getProximity();
-        return distnace; 
+        conveyorMotor.set(VictorSPXControlMode.PercentOutput,-.7*value);
     }
 
 
-    // Color detectedColor = m_colorSensor.getColor();
-    // double IR = m_colorSensor.getIR();
-
-    // SmartDashboard.putNumber("red", detectedColor.red);
-    // SmartDashboard.putNumber("green", detectedColor.green);
-    // SmartDashboard.putNumber("blue", detectedColor.blue);
-    // SmartDashboard.putNumber("IR", IR);
 }

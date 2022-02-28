@@ -5,9 +5,6 @@
 package frc.robot;
 
 
-import java.io.File;
-import java.io.IOException;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
@@ -42,11 +39,11 @@ public class Robot extends TimedRobot {
 
   public void robotInit() {
     autoChooser.setDefaultOption("Drive",AutoConstants.DRIVE);
-    autoChooser.addOption("Simple Auto",AutoConstants.SIMPLEAUTO);
-    autoChooser.addOption("Simple Auto Double Low",AutoConstants.SIMPLEAUTOLOWLOW);
-    autoChooser.addOption("Simple Auto Double High",AutoConstants.SIMPLEAUTOHIGHHIGH);
-    autoChooser.addOption("Double cargo low low",AutoConstants.DOUBLECARGOLOWLOW);
-    autoChooser.addOption("Double cargo low high",AutoConstants.DOUBLECARGOLOWHIGH);
+    autoChooser.addOption("Simple Auto",AutoConstants.SIMPLE_AUTO);
+    autoChooser.addOption("Simple Auto Double Low",AutoConstants.SIMPLE_AUTO_LOW_LOW);
+    autoChooser.addOption("Simple Auto Double High",AutoConstants.SIMPLE_AUTO_HIGH_HIGH);
+    autoChooser.addOption("Double cargo low low",AutoConstants.DOUBLE_CARGO_LOW_LOW);
+    autoChooser.addOption("Double cargo low high",AutoConstants.DOUBLE_CARGO_LOW_HIGH);
     SmartDashboard.putData("Auto Options", autoChooser);
     try{
     forward = TrajectoryUtil.fromPathweaverJson(
@@ -62,7 +59,7 @@ public class Robot extends TimedRobot {
       {
         System.out.println("Can't read file");
       }
-    
+
     CameraServer.startAutomaticCapture("cam0",0);
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.

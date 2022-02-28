@@ -7,19 +7,11 @@ package frc.robot;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.math.trajectory.TrajectoryUtil;
-import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
-import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.ClimbDown;
@@ -32,7 +24,6 @@ import frc.robot.commands.Drive;
 import frc.robot.commands.DriveAuto;
 import frc.robot.commands.DriverConveyorUp;
 import frc.robot.commands.Shoot;
-import frc.robot.commands.WarmUpShooter;
 import frc.robot.commands.Window;
 import frc.robot.commands.SimpleAuto;
 import frc.robot.commands.SimpleAutoHighHigh;
@@ -47,11 +38,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Shooter;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This class is where the bulk of the robot should be declared. Since
  * Command-based is a
@@ -63,9 +49,9 @@ import java.util.List;
  */
 public class RobotContainer {
 
-  final Drivetrain m_robotDrive = new Drivetrain();
-  final Climber m_robotClimber = new Climber();
-  final Conveyor m_robotConveyor = new Conveyor();
+  final Drivetrain m_drivetrain = new Drivetrain();
+  final Climber m_climber = new Climber();
+  final Conveyor m_conveyor = new Conveyor();
   final Shooter m_shooter = new Shooter();
 
   // The robot's subsystems and commands are defined here...
@@ -78,8 +64,9 @@ public class RobotContainer {
    */
   public RobotContainer() {
 
-    m_robotDrive.setDefaultCommand(new Drive(() -> driverLeftStick.getX(),
-        () -> driverRightStick.getY(), m_robotDrive));
+    m_drivetrain.setDefaultCommand(new Drive(driverLeftStick::getX,
+                                             driverRightStick::getY,
+                                             m_drivetrain));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -109,16 +96,16 @@ public class RobotContainer {
     final JoystickButton reverseLockerButton = new JoystickButton(driverRightStick, 3);
 
     // button actions here
-    climbUp.whileHeld(new ClimbUp(m_robotClimber));
-    climbDown.whileHeld(new ClimbDown(m_robotClimber));
-    conveyorUp.whileHeld(new ConveyorUp(m_robotConveyor));
-    driverCollect.whileHeld(new DriverConveyorUp(m_robotConveyor));
-    conveyorDownSlow.whileHeld(new ConveyorDown(m_robotConveyor, 0));
-    shootHigh.whileHeld(new Shoot(m_shooter, ShooterConstants.HIGHGOALSPEED));
-    shootLow.whileHeld(new Shoot(m_shooter, ShooterConstants.LOWGOALSPEED));
-    conveyorUpTrigger.whileHeld(new ConveyorUp(m_robotConveyor));
-    windowUp.whileHeld(new Window(m_robotClimber, .25));
-    windowDown.whileHeld(new Window(m_robotClimber, -.25));
+    climbUp.whileHeld(new ClimbUp(m_climber));
+    climbDown.whileHeld(new ClimbDown(m_climber));
+    conveyorUp.whileHeld(new ConveyorUp(m_conveyor));
+    driverCollect.whileHeld(new DriverConveyorUp(m_conveyor));
+    conveyorDownSlow.whileHeld(new ConveyorDown(m_conveyor, 0));
+    shootHigh.whileHeld(new Shoot(m_shooter, ShooterConstants.HIGH_GOAL_SPEED));
+    shootLow.whileHeld(new Shoot(m_shooter, ShooterConstants.LOW_GOAL_SPEED));
+    conveyorUpTrigger.whileHeld(new ConveyorUp(m_conveyor));
+    windowUp.whileHeld(new Window(m_climber, .25));
+    windowDown.whileHeld(new Window(m_climber, -.25));
     // reverseLockerButton.whileHeld();
 
   }
@@ -131,24 +118,35 @@ public class RobotContainer {
   public Command getAutonomousCommand(String autoMode) {
     SmartDashboard.putString("AutoMode", "NONE");
     switch (autoMode) {
-      case AutoConstants.SIMPLEAUTO:
+      case AutoConstants.SIMPLE_AUTO:
         SmartDashboard.putString("AutoMode", "SIMPLEAUTO");
-        return new SimpleAuto(m_shooter, m_robotConveyor, m_robotDrive);
+        return new SimpleAuto(m_shooter,
+                              m_conveyor,
+                              m_drivetrain);
       case AutoConstants.DRIVE:
         SmartDashboard.putString("AutoMode", "DRIVE");
-        return new DriveAuto(1, m_robotDrive).withTimeout(3.0);
-      case AutoConstants.DOUBLECARGOLOWLOW:
+        return new DriveAuto(1,
+                             m_drivetrain).withTimeout(3.0);
+      case AutoConstants.DOUBLE_CARGO_LOW_LOW:
         SmartDashboard.putString("AutoMode", "DOUBLECARGOLOWLOW");
-        return new DoubleCargoLowLow(m_shooter, m_robotConveyor, m_robotDrive);
-      case AutoConstants.DOUBLECARGOLOWHIGH:
+        return new DoubleCargoLowLow(m_shooter,
+                                     m_conveyor,
+                                     m_drivetrain);
+      case AutoConstants.DOUBLE_CARGO_LOW_HIGH:
         SmartDashboard.putString("AutoMode", "DOUBLECARGOLOWHIGH");
-        return new DoubleCargoLowHigh(m_shooter, m_robotConveyor, m_robotDrive);
-      case AutoConstants.SIMPLEAUTOLOWLOW:
+        return new DoubleCargoLowHigh(m_shooter,
+                                      m_conveyor,
+                                      m_drivetrain);
+      case AutoConstants.SIMPLE_AUTO_LOW_LOW:
         SmartDashboard.putString("AutoMode", "SIMPLEAUTOLOWLOW");
-        return new SimpleAutoLowLow(m_shooter, m_robotConveyor, m_robotDrive);
-        case AutoConstants.SIMPLEAUTOHIGHHIGH:
+        return new SimpleAutoLowLow(m_shooter,
+                                    m_conveyor,
+                                    m_drivetrain);
+        case AutoConstants.SIMPLE_AUTO_HIGH_HIGH:
         SmartDashboard.putString("AutoMode", "SIMPLEAUTOHIGHHIGH");
-        return new SimpleAutoHighHigh(m_shooter, m_robotConveyor, m_robotDrive);
+        return new SimpleAutoHighHigh(m_shooter,
+                                      m_conveyor,
+                                      m_drivetrain);
     }
 
     return null;

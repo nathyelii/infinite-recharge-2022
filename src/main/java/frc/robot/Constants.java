@@ -46,29 +46,27 @@ public final class Constants {
     public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
 
     public static final class ShooterConstants {
-        
-        public static final double LOWGOALSPEED = 35.0;
-        public static final double HIGHGOALSPEED = 68.0;
-        public static final int SHOOTERCANBUSNUMBER= 6;
-        public static final double SHOOTERSPEED = -.99;
-        public static final double SHOOTERSPEEDSTOP =0;
+
+        public static final double LOW_GOAL_SPEED = 35.0;
+        public static final double HIGH_GOAL_SPEED = 68.0;
+        public static final int SHOOTER_CANBUS_NUMBER = 6;
+        public static final double SHOOTER_SPEED_STOP =0;
     }
 
     public static final class ClimberConstants {
 
-        public static final int climberChannel = 7; 
-        public static final int WINDOWMOTORCANBUSNUMBER = 8; 
-        public static final double CLIMBSPEEDDOWN = .7;
-        public static final double CLIMBSPEEDUP = 1;
-        public static final double climbSpeedStop=0;
+        public static final int CLIMBER_CANBUS_NUMBER = 7;
+        public static final int WINDOW_MOTOR_CANBUS_NUMBER = 8;
+        public static final double CLIMB_SPEED_DOWN = .7;
+        public static final double CLIMB_SPEED_UP = 1;
+        public static final double CLIMB_SPEED_STOP =0;
     }
 
-   public static final class ConveyorConstants{ 
-       public static final int intakeConveyorCANBUSNUMBER= 4;
-       public static final int conveyorCANBUSNUMBER = 5;  
-       public static final double conveyorSpeed = 1; 
-       public static final double conveyorSpeedStop= 0; 
-       public static final int COLORTHRESHOLD = 100;
+   public static final class ConveyorConstants{
+       public static final int INTAKE_CONVEYOR_CANBUS_NUMBER = 4;
+       public static final int CONVEYOR_CANBUS_NUMBER = 5;
+       public static final double CONVEYOR_SPEED = 1;
+       public static final double CONVEYOR_STOP_SPEED = 0;
    }
 
    public static final class AutoConstants {
@@ -80,17 +78,17 @@ public final class Constants {
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
 
-    public static final String DOUBLECARGOLOWLOW = "a";
-    public static final String DOUBLECARGOLOWHIGH = "b";
-    public static final String JUSTMOVE = "c";
-    public static final String SINGLECARGOLOW = "d"; 
-    public static final String SINGLECARGOHIGH = "e"; 
-    public static final String DOUBLECARGOLOWLOWSETUP = "f"; 
-    public static final String DOUBLECARGOHIGHHIGH = "g"; 
-    public static final String SIMPLEAUTO = "h"; 
+    public static final String DOUBLE_CARGO_LOW_LOW = "a";
+    public static final String DOUBLE_CARGO_LOW_HIGH = "b";
+    public static final String JUST_MOVE = "c";
+    public static final String SINGLE_CARGO_LOW = "d";
+    public static final String SINGLE_CARGO_HIGH = "e";
+    public static final String DOUBLE_CARGO_LOW_LOW_SETUP = "f";
+    public static final String DOUBLE_CARGO_HIGH_HIGH = "g";
+    public static final String SIMPLE_AUTO = "h";
     public static final String DRIVE = "i";
-    public static final String SIMPLEAUTOLOWLOW = "j";  
-    public static final String SIMPLEAUTOHIGHHIGH = "k";  
+    public static final String SIMPLE_AUTO_LOW_LOW = "j";
+    public static final String SIMPLE_AUTO_HIGH_HIGH = "k";
 
       }
 
@@ -116,13 +114,10 @@ public final class Constants {
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(
                 kTrackwidthMeters);
 
-        public static final int RIGHTSONCANBUSNUMBER = 3;
-        public static final int LEFTSONCANBUSNUMBER = 2;
-        public static final int RIGHTFATHERCANBUSNUMBER = 0;
-        public static final int LEFTFATHERCANBUSNUMBER = 1;
-
-        public static final boolean kLeftEncoderReversed = false;
-        public static final boolean kRightEncoderReversed = true;
+        public static final int RIGHT_SON_CANBUS_NUMBER = 3;
+        public static final int LEFT_SON_CANBUS_NUMBER = 2;
+        public static final int RIGHT_FATHER_CANBUS_NUMBER = 0;
+        public static final int LEFT_FATHER_CANBUS_NUMBER = 1;
 
         public static final int kEncoderCPR = 4096;
         public static final double kWheelDiameterMeters = 0.1397;
@@ -134,8 +129,8 @@ public final class Constants {
 
         public static double linearize(final double x1, final double y1, final double x2, final double y2,
                 final double input) {
-            final Double m = (y2 - y1) / (x2 - x1);
-            final Double b = y1 - (-m * x1);
+            final double m = (y2 - y1) / (x2 - x1);
+            final double b = y1 - (-m * x1);
             return m * input + b;
 
         }

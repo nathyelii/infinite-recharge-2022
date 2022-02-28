@@ -28,12 +28,12 @@ public class Drivetrain extends SubsystemBase {
     private final DifferentialDrive m_drive;
 
     // parent motors
-    private final WPI_TalonSRX leftFather = new WPI_TalonSRX(DriveConstants.LEFTFATHERCANBUSNUMBER);
-    private final WPI_TalonSRX rightFather = new WPI_TalonSRX(DriveConstants.RIGHTFATHERCANBUSNUMBER);
+    private final WPI_TalonSRX leftFather = new WPI_TalonSRX(DriveConstants.LEFT_FATHER_CANBUS_NUMBER);
+    private final WPI_TalonSRX rightFather = new WPI_TalonSRX(DriveConstants.RIGHT_FATHER_CANBUS_NUMBER);
 
     // son motors
-    private final WPI_VictorSPX leftSon = new WPI_VictorSPX(DriveConstants.LEFTSONCANBUSNUMBER);
-    private final WPI_VictorSPX rightSon = new WPI_VictorSPX(DriveConstants.RIGHTSONCANBUSNUMBER);
+    private final WPI_VictorSPX leftSon = new WPI_VictorSPX(DriveConstants.LEFT_SON_CANBUS_NUMBER);
+    private final WPI_VictorSPX rightSon = new WPI_VictorSPX(DriveConstants.RIGHT_SON_CANBUS_NUMBER);
 
     private final NeutralMode brakeMode = NeutralMode.Brake;
 
@@ -139,19 +139,19 @@ public class Drivetrain extends SubsystemBase {
     public double getAverageEncoderDistance() {
         return (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2.0;
       }
-    
+
       public void setMaxOutput(double maxOutput) {
         m_drive.setMaxOutput(maxOutput);
       }
-    
+
       public void zeroHeading() {
         imu.reset();
       }
-    
+
       public double getHeading() {
         return imu.getGyroAngleY();
       }
-    
+
       public double getTurnRate() {
         return -imu.getRate();
       }

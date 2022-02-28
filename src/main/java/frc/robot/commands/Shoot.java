@@ -15,7 +15,7 @@ public class Shoot  extends CommandBase {
     int index =0;
     double[] history;
     int rollingAverageSize;
-    
+
 
     public Shoot (Shooter shooter, double goalSpeed){
         super();
@@ -50,19 +50,19 @@ public class Shoot  extends CommandBase {
         if (Math.abs(average - goalSpeed) > 5)
         {
             SmartDashboard.putString("CanShoot", "SHOOT");
-        } 
+        }
         else{
             SmartDashboard.delete("CanShoot");
         }
 
 
-        
+
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_shooter.set(ShooterConstants.SHOOTERSPEEDSTOP);
+        m_shooter.set(ShooterConstants.SHOOTER_SPEED_STOP);
         SmartDashboard.putString("Shooter On", "No");
         SmartDashboard.delete("CanShoot");
         SmartDashboard.putString("CanShoot", "DON'T SHOOT");
