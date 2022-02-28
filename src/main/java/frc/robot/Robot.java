@@ -5,10 +5,19 @@
 package frc.robot;
 
 
+import java.io.File;
+import java.io.IOException;
+
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.AutoConstants;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,7 +29,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  
+  private final SendableChooser<String> autoChooser = new SendableChooser<>();
+  public static  Trajectory forward;
+  public static Trajectory backward;
 
 
   /**
@@ -30,6 +41,28 @@ public class Robot extends TimedRobot {
   @Override
 
   public void robotInit() {
+    autoChooser.setDefaultOption("Drive",AutoConstants.DRIVE);
+    autoChooser.addOption("Simple Auto",AutoConstants.SIMPLEAUTO);
+    autoChooser.addOption("Simple Auto Double Low",AutoConstants.SIMPLEAUTOLOWLOW);
+    autoChooser.addOption("Simple Auto Double High",AutoConstants.SIMPLEAUTOHIGHHIGH);
+    autoChooser.addOption("Double cargo low low",AutoConstants.DOUBLECARGOLOWLOW);
+    autoChooser.addOption("Double cargo low high",AutoConstants.DOUBLECARGOLOWHIGH);
+    SmartDashboard.putData("Auto Options", autoChooser);
+    try{
+    forward = TrajectoryUtil.fromPathweaverJson(
+              Filesystem.getDeployDirectory().toPath().resolve("paths/output/SimpleForward.wpilib.json"));
+    }catch(Exception e)
+    {
+        System.out.println("Can't read file");
+    }
+    try{
+      backward = TrajectoryUtil.fromPathweaverJson(
+                Filesystem.getDeployDirectory().toPath().resolve("paths/output/SimpleForward.wpilib.json"));
+      }catch(Exception e)
+      {
+        System.out.println("Can't read file");
+      }
+    
     CameraServer.startAutomaticCapture("cam0",0);
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
@@ -65,7 +98,8 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    String temp = autoChooser.getSelected();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand(temp);
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

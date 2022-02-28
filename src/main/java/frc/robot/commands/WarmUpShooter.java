@@ -5,72 +5,61 @@ import java.util.Arrays;
 import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.Shooter;
 
-public class Shoot  extends CommandBase {
+public class WarmUpShooter extends CommandBase {
     private final Shooter m_shooter;
     private double goalSpeed;
     BangBangController controller;
     int index =0;
     double[] history;
     int rollingAverageSize;
-    
 
-    public Shoot (Shooter shooter, double goalSpeed){
+    public WarmUpShooter (Shooter shooter, double goalSpeed){
         super();
-        m_shooter = shooter;
-        addRequirements(m_shooter);
-        this.goalSpeed = goalSpeed;
         controller = new BangBangController();
+        SmartDashboard.putNumber("goalSpeed", goalSpeed);
+        m_shooter = shooter;
+        this.goalSpeed = goalSpeed;
+        addRequirements(m_shooter);
         rollingAverageSize = 5;
 
     }
 
     @Override
     public void initialize() {
-        SmartDashboard.delete("CanShoot");
         SmartDashboard.putNumber("goalSpeed", goalSpeed);
         history = new double[rollingAverageSize];
         index=0;
-        SmartDashboard.putString("CanShoot", "DON'T SHOOT");
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        
         goalSpeed = SmartDashboard.getNumber("goalSpeed", 0);
         SmartDashboard.putString("Shooter On", "Yes");
-        double speed = controller.calculate(m_shooter.getEncoderRate(), goalSpeed);
-        SmartDashboard.putNumber("Shooter Speed", m_shooter.getEncoderRate());
-        m_shooter.set(speed);
         history[++index%rollingAverageSize] = m_shooter.getEncoderRate();
-        double total = Arrays.stream(history).sum();
-        double average = total/rollingAverageSize;
-        if (Math.abs(average - goalSpeed) > 5)
-        {
-            SmartDashboard.putString("CanShoot", "SHOOT");
-        } 
-        else{
-            SmartDashboard.delete("CanShoot");
-        }
-
-
-        
+        double speed = controller.calculate(m_shooter.getEncoderRate(), goalSpeed);
+        SmartDashboard.putNumber("Shooter Speed", speed);
+        m_shooter.set(speed);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_shooter.set(ShooterConstants.SHOOTERSPEEDSTOP);
-        SmartDashboard.putString("Shooter On", "No");
-        SmartDashboard.delete("CanShoot");
-        SmartDashboard.putString("CanShoot", "DON'T SHOOT");
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        // double total = Arrays.stream(history).sum();
+        // double average = total/rollingAverageSize;
+        // if (average - goalSpeed > 0)
+        // {
+        //     return true;
+        // } 
         return false;
     }
 }
+

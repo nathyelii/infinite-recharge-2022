@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ConveyorConstants;
 import frc.robot.subsystems.Conveyor;
 
-public class ConveyorUp extends CommandBase {
+public class DriverConveyorUp extends CommandBase {
     private final Conveyor m_conveyor; 
-    public ConveyorUp (Conveyor conveyor){
+    public DriverConveyorUp (Conveyor conveyor){
         super();
         m_conveyor = conveyor; 
         addRequirements(m_conveyor);
@@ -22,13 +22,13 @@ public class ConveyorUp extends CommandBase {
   public void execute() {
     double color= m_conveyor.readColorSensor();
          SmartDashboard.putNumber("color", color);
-      m_conveyor.setBoth(ConveyorConstants.conveyorSpeed);
+      m_conveyor.setBothOpposite(ConveyorConstants.conveyorSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-      m_conveyor.setBoth(ConveyorConstants.conveyorSpeedStop); 
+      m_conveyor.setBothOpposite(ConveyorConstants.conveyorSpeedStop); 
   }
 
   // Returns true when the command should end.
