@@ -1,39 +1,43 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ConveyorConstants;
 import frc.robot.subsystems.Conveyor;
 
-public class DriverConveyorUp extends CommandBase {
-    private final Conveyor m_conveyor; 
-    public DriverConveyorUp (Conveyor conveyor){
-        super();
-        m_conveyor = conveyor; 
-        addRequirements(m_conveyor);
-    }
+public
+class DriverConveyorUp extends CommandBase {
+  private final Conveyor m_conveyor;
 
-    @Override
-  public void initialize() {
+  public
+  DriverConveyorUp(Conveyor conveyor) {
+    super();
+    m_conveyor = conveyor;
+    addRequirements(m_conveyor);
+  }
+
+  @Override
+  public
+  void initialize() {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    double color= m_conveyor.readColorSensor();
-         SmartDashboard.putNumber("color", color);
-      m_conveyor.setBothOpposite(ConveyorConstants.conveyorSpeed);
+  public
+  void execute() {
+    m_conveyor.setBothOpposite(ConveyorConstants.CONVEYOR_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-      m_conveyor.setBothOpposite(ConveyorConstants.conveyorSpeedStop); 
+  public
+  void end(boolean interrupted) {
+    m_conveyor.setBothOpposite(ConveyorConstants.CONVEYOR_STOP_SPEED);
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public
+  boolean isFinished() {
     return false;
   }
 
