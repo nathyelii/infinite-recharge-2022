@@ -21,10 +21,11 @@ public class IronMechEncoder
         dir = -1;
     }
 
-    public void setDistancePerPulse(double distancePerPulse)
-    {
-        this.distancePerPulse=distancePerPulse;
-    }
+  public
+  void setDistancePerPulse(double distancePerPulse)
+  {
+    this.distancePerPulse = distancePerPulse;
+  }
 
     public double getDistance()
     {
@@ -35,8 +36,9 @@ public class IronMechEncoder
         return motor.getSelectedSensorVelocity()*distancePerPulse*dir;
     }
 
-    public void reset(){
-        motor.setSelectedSensorPosition(0);
-    }
+  public
+  void reset() {
+    motor.setSelectedSensorPosition(0);
+  }
 
 }

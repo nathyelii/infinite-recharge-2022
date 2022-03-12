@@ -2,8 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
@@ -21,7 +19,7 @@ public class SimpleAuto extends SequentialCommandGroup {
                                                 //this was 2.0 before playoffs
                                                 new DriveAuto(-.75, m_robotDrive).withTimeout(2.0-.4),
                                                 new ConveyorUp(conveyor).withTimeout(3.1)),
-                                new ConveyorUp(conveyor).withTimeout(.5), 
+                                new ConveyorUp(conveyor).withTimeout(.5),
                                 new ParallelCommandGroup(
                                                 new ConveyorDown(conveyor, 0).withTimeout(.5),
 
