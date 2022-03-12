@@ -53,12 +53,12 @@ class Constants {
 
     public static final class ShooterConstants {
 
-        public static final double LOWGOALSPEED = 35.0;
-        public static final double LOWGOALAUTOSPEED = 30.0;
-        public static final double HIGHGOALSPEED = 70.0; //70 is perfect
-        public static final int SHOOTERCANBUSNUMBER= 6;
-        public static final double SHOOTERSPEED = -.99;
-        public static final double SHOOTERSPEEDSTOP =0;
+        public static final double LOW_GOAL_SPEED = 35.0;
+        public static final double LOW_GOAL_AUTO_SPEED = 30.0;
+        public static final double HIGH_GOAL_SPEED = 70.0; //70 is perfect
+        public static final int SHOOTER_CANBUS_NUMBER = 6;
+        public static final double SHOOTER_SPEED = -.99;
+        public static final double SHOOTER_SPEED_STOP =0;
     }
 
   public static final

@@ -12,9 +12,9 @@ public class SimpleAutoHighHigh extends SequentialCommandGroup {
                 addCommands(
                                 new ParallelCommandGroup(
                                                 new DriveAuto(-.75, m_robotDrive).withTimeout(.25),
-                                                new Shoot(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(2.0)),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout( 2.0)),
                                 new ParallelCommandGroup(
-                                                new Shoot(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(2.5),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout( 2.5),
                                                 new ConveyorUp(conveyor).withTimeout(1.0)),
                                 new ParallelCommandGroup(
                                                 new DriveAuto(-.75, m_robotDrive).withTimeout(1),
@@ -24,11 +24,11 @@ public class SimpleAutoHighHigh extends SequentialCommandGroup {
                                 new ParallelCommandGroup(
                                                 new SequentialCommandGroup(
                                                                 new WarmUpShooter(shooter,
-                                                                                ShooterConstants.HIGHGOALSPEED)
+                                                                                ShooterConstants.HIGH_GOAL_SPEED )
                                                                                                 .withTimeout(2.0),
                                                                 new DriveAuto(.75, m_robotDrive).withTimeout(.75))),
                                 new ParallelCommandGroup(
-                                                new Shoot(shooter, ShooterConstants.HIGHGOALSPEED).withTimeout(3.0),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout( 3.0),
                                                 new ConveyorUp(conveyor).withTimeout(3.0)));
         }
 
