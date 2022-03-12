@@ -6,12 +6,19 @@ public class IronMechEncoder
 {
     private WPI_TalonSRX motor;
     private double distancePerPulse;
+    private int dir;
 
 
     public IronMechEncoder( WPI_TalonSRX motor)
     {
         this.motor=motor;
         distancePerPulse=0;
+        dir = 1;
+
+    }
+
+    public void setInverted(){
+        dir = -1;
     }
 
     public void setDistancePerPulse(double distancePerPulse)
@@ -21,11 +28,11 @@ public class IronMechEncoder
 
     public double getDistance()
     {
-        return motor.getSelectedSensorPosition()*distancePerPulse;
+        return motor.getSelectedSensorPosition()*distancePerPulse*dir;
     }
 
     public double getRate(){
-        return motor.getSelectedSensorVelocity()*distancePerPulse;
+        return motor.getSelectedSensorVelocity()*distancePerPulse*dir;
     }
 
     public void reset(){

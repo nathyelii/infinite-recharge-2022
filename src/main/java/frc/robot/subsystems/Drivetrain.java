@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -11,8 +12,9 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.ADIS16448_IMU;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.ADIS16448_IMU.IMUAxis;
+import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -45,7 +47,7 @@ public class Drivetrain extends SubsystemBase {
 
     private boolean isForward;
 
-    public static ADIS16448_IMU imu = new ADIS16448_IMU();
+    public static ADIS16470_IMU imu = new ADIS16470_IMU();
 
     public Drivetrain() {
         super();
@@ -97,8 +99,10 @@ public class Drivetrain extends SubsystemBase {
         leftEncoder.setDistancePerPulse(DriveConstants.METERSPERPULSE);
         rightEncoder.setDistancePerPulse(DriveConstants.METERSPERPULSE);
 
+        rightEncoder.setInverted();
+
         resetEncoders();
-        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(imu.getGyroAngleY()));
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(imu.getAngle()));
     }
 
     /**
@@ -115,7 +119,7 @@ public class Drivetrain extends SubsystemBase {
 
     public void resetOdometry(Pose2d pose) {
       resetEncoders();
-      m_odometry.resetPosition(pose, Rotation2d.fromDegrees(imu.getGyroAngleY()));
+      m_odometry.resetPosition(pose, Rotation2d.fromDegrees(imu.getAngle()));
     }
 
     public DifferentialDriveWheelSpeeds getWheelSpeeds() {
@@ -150,7 +154,8 @@ public class Drivetrain extends SubsystemBase {
       }
     
       public double getHeading() {
-        return imu.getGyroAngleY();
+
+        return imu.getAngle();
       }
     
       public double getTurnRate() {
@@ -182,13 +187,15 @@ public class Drivetrain extends SubsystemBase {
     public Object arcadeDrive(double fwd, double rot) {
         // rightFather.set(ControlMode.PercentOutput,fwd+rot);
         // leftFather.set(ControlMode.PercentOutput,fwd-rot);
+        System.out.println("ArcadeDrive");
         if (Math.abs(fwd) <= .05) {
           fwd = 0;
         }
         if (Math.abs(rot) <= .05) {
           rot = 0;
         }
-        m_drive.arcadeDrive(fwd, -1 * rot);
+        // m_drive.arcadeDrive(fwd, -1 * rot);
+        // m_drive.arcadeDrive(.75, .75);
         // m_drive.tankDrive(left, right);
         return null;
       }
