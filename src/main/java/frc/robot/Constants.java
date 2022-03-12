@@ -51,14 +51,15 @@ class Constants {
                                                0,
                                                1.0);
 
-  public static final
-  class ShooterConstants {
+    public static final class ShooterConstants {
 
-    public static final double LOW_GOAL_SPEED = 35.0;
-    public static final double HIGH_GOAL_SPEED = 68.0;
-    public static final int SHOOTER_CANBUS_NUMBER = 6;
-    public static final double SHOOTER_SPEED_STOP = 0;
-  }
+        public static final double LOW_GOAL_SPEED = 35.0;
+        public static final double LOW_GOAL_AUTO_SPEED = 30.0;
+        public static final double HIGH_GOAL_SPEED = 70.0; //70 is perfect
+        public static final int SHOOTER_CANBUS_NUMBER = 6;
+        public static final double SHOOTER_SPEED = -.99;
+        public static final double SHOOTER_SPEED_STOP =0;
+    }
 
   public static final
   class ClimberConstants {

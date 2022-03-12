@@ -108,28 +108,17 @@ class RobotContainer {
   void configureButtonBindings() {
 
     // buttons here
-    final JoystickButton climbUp = new JoystickButton(driverLeftStick,
-                                                      5);
-    final JoystickButton climbDown = new JoystickButton(driverLeftStick,
-                                                        3);
-    final JoystickButton windowUp = new JoystickButton(driverRightStick,
-                                                       5);
-    final JoystickButton windowDown = new JoystickButton(driverRightStick,
-                                                         3);
-    final JoystickButton conveyorUp = new JoystickButton(copilot,
-                                                         6);
-    final JoystickButton conveyorUpTrigger = new JoystickButton(copilot,
-                                                                1);
-    final JoystickButton driverCollect = new JoystickButton(driverRightStick,
-                                                            4);
-    final JoystickButton conveyorDownSlow = new JoystickButton(copilot,
-                                                               7);
-    final JoystickButton shootHigh = new JoystickButton(copilot,
-                                                        3);
-    final JoystickButton shootLow = new JoystickButton(copilot,
-                                                       2);
-    final JoystickButton reverseLockerButton = new JoystickButton(driverRightStick,
-                                                                  3);
+    final JoystickButton climbUp = new JoystickButton(driverLeftStick, 5);
+    final JoystickButton climbDown = new JoystickButton(driverLeftStick, 3);
+    final JoystickButton windowUp = new JoystickButton(driverRightStick, 5);
+    final JoystickButton windowDown = new JoystickButton(driverRightStick, 3);
+    final JoystickButton conveyorUp = new JoystickButton(copilot, 6);
+    final JoystickButton conveyorUpTrigger = new JoystickButton(copilot, 1);
+    final JoystickButton driverCollect = new JoystickButton(driverLeftStick, 4);
+    final JoystickButton conveyorDownSlow = new JoystickButton(copilot, 7);
+    final JoystickButton shootHigh = new JoystickButton(copilot, 3);
+    final JoystickButton shootLow = new JoystickButton(copilot, 2);
+    final JoystickButton reverseLockerButton = new JoystickButton(driverRightStick, 3);
 
     // button actions here
     climbUp.whileHeld(new ClimbUp(m_climber));
@@ -156,10 +145,16 @@ class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public
-  Command getAutonomousCommand(String autoMode) {
-    SmartDashboard.putString("AutoMode",
-                             "NONE");
+  public Command getAutonomousCommand(String autoMode,boolean override) {
+
+    if(override)
+    {
+      SmartDashboard.putString("AutoMode", "SIMPLEAUTO");
+        return new SimpleAuto(m_shooter, m_robotConveyor, m_robotDrive);
+        // return new SimpleAutoHighHigh(m_shooter, m_robotConveyor, m_robotDrive);
+        // SmartDashboard.putString("AutoMode", "SIMPLEAUTOHIGHHIGH");
+    }
+    SmartDashboard.putString("AutoMode", "NONE");
     switch (autoMode) {
       case AutoConstants.SIMPLE_AUTO:
         SmartDashboard.putString("AutoMode",
