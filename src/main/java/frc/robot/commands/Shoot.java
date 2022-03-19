@@ -77,6 +77,8 @@ class Shoot extends CommandBase {
     SmartDashboard.delete("CanShoot");
     SmartDashboard.putString("CanShoot",
                              "DON'T SHOOT");
+
+    m_shooter.set(0);
   }
 
   // Returns true when the command should end.

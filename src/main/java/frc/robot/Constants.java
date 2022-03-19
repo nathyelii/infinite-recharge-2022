@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.util.Units;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -131,7 +132,7 @@ class Constants {
     public static final int LEFT_FATHER_CANBUS_NUMBER = 1;
 
     public static final int kEncoderCPR = 4096;
-    public static final double kWheelDiameterMeters = 0.1397;
+    public static final double kWheelDiameterMeters = Units.inchesToMeters(6);
 
     public static final double METERSPERPULSE = (kWheelDiameterMeters * Math.PI) / kEncoderCPR;
     public static final double kEncoderDistancePerPulse =

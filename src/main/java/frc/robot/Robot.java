@@ -5,6 +5,9 @@
 package frc.robot;
 
 
+import org.photonvision.PhotonCamera;
+import org.photonvision.targeting.PhotonPipelineResult;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
@@ -29,6 +32,7 @@ class Robot extends TimedRobot {
   private final SendableChooser<String> autoChooser = new SendableChooser<>();
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+  // private PhotonCamera camera;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -69,8 +73,13 @@ class Robot extends TimedRobot {
       System.out.println("Can't read file");
     }
 
-    CameraServer.startAutomaticCapture("cam0",
-                                       0);
+    // camera = new PhotonCamera("photonvision");
+  
+
+    // CameraServer.startAutomaticCapture("cam0",
+    //                                    0);
+
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -91,7 +100,6 @@ class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-
 
   }
 

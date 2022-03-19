@@ -4,10 +4,16 @@
 
 package frc.robot;
 
+
+import java.io.IOException;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -31,11 +37,13 @@ import frc.robot.commands.Shoot;
 import frc.robot.commands.SimpleAuto;
 import frc.robot.commands.SimpleAutoHighHigh;
 import frc.robot.commands.SimpleAutoLowLow;
+import frc.robot.commands.StopShooter;
 import frc.robot.commands.Window;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
+import java.nio.file.Path;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -118,11 +126,13 @@ class RobotContainer {
     final JoystickButton conveyorDownSlow = new JoystickButton(copilot, 7);
     final JoystickButton shootHigh = new JoystickButton(copilot, 3);
     final JoystickButton shootLow = new JoystickButton(copilot, 2);
+    final JoystickButton stopShooter = new JoystickButton(copilot, 8);
     final JoystickButton reverseLockerButton = new JoystickButton(driverRightStick, 3);
 
     // button actions here
     climbUp.whileHeld(new ClimbUp(m_climber));
     climbDown.whileHeld(new ClimbDown(m_climber));
+    stopShooter.whileHeld(new StopShooter(m_shooter, .1));
     conveyorUp.whileHeld(new ConveyorUp(m_conveyor));
     driverCollect.whileHeld(new DriverConveyorUp(m_conveyor));
     conveyorDownSlow.whileHeld(new ConveyorDown(m_conveyor,
@@ -149,10 +159,29 @@ class RobotContainer {
 
     if(override)
     {
-      SmartDashboard.putString("AutoMode", "SIMPLEAUTO");
-        return new SimpleAuto(m_shooter, m_robotConveyor, m_robotDrive);
+     SmartDashboard.putString("AutoMode",
+                                 "SIMPLEAUTOHIGHHIGH");
+        return new SimpleAutoHighHigh(m_shooter,
+                                      m_conveyor,
+                                      m_drivetrain); 
+      /*
+      String trajectoryJSON = "paths/output/driveToBlueStation.wpilib.json";
+      Trajectory trajectory = new Trajectory();
+      m_drivetrain.resetEncoders();
+      try {
+        Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+        trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+     } catch (IOException ex) {
+        DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+       return  new SimpleAuto(m_shooter,
+        m_conveyor,
+        m_drivetrain); 
+      }
+      return followPath(m_drivetrain,trajectory);
+        // return new SimpleAuto(m_shooter, m_conveyor, m_drivetrain);
         // return new SimpleAutoHighHigh(m_shooter, m_robotConveyor, m_robotDrive);
         // SmartDashboard.putString("AutoMode", "SIMPLEAUTOHIGHHIGH");
+        */
     }
     SmartDashboard.putString("AutoMode", "NONE");
     switch (autoMode) {
