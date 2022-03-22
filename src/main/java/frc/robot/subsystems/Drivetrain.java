@@ -175,7 +175,6 @@ public class Drivetrain extends SubsystemBase {
         rightEncoder.getDistance());
     SmartDashboard.putNumber("Heading",
         getHeading());
-
     m_odometry.update(
         Rotation2d.fromDegrees(imu.getAngle()), leftEncoder.getDistance(), rightEncoder.getDistance());
   }

@@ -67,7 +67,7 @@ class Constants {
 
     public static final int CLIMBER_CANBUS_NUMBER = 7;
     public static final int WINDOW_MOTOR_CANBUS_NUMBER = 8;
-    public static final double CLIMB_SPEED_DOWN = .7;
+    public static final double CLIMB_SPEED_DOWN = 1;
     public static final double CLIMB_SPEED_UP = 1;
     public static final double CLIMB_SPEED_STOP = 0;
   }

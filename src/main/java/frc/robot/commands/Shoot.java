@@ -16,22 +16,32 @@ class Shoot extends CommandBase {
   double[] history;
   int rollingAverageSize;
   private double goalSpeed;
+  private boolean readDashboard;
 
 
   public
-  Shoot(Shooter shooter, double goalSpeed) {
+  Shoot(Shooter shooter, double goalSpeed, boolean readDashboard) {
     super();
     m_shooter = shooter;
     addRequirements(m_shooter);
+    this.readDashboard=readDashboard;
+    
     this.goalSpeed = goalSpeed;
     controller = new BangBangController();
     rollingAverageSize = 5;
-
+    SmartDashboard.putNumber("goalSpeed",
+    goalSpeed);
+    
   }
 
   @Override
   public
   void initialize() {
+    if(readDashboard)
+    {
+      System.out.println("READING FROM DASHBOARD");
+      goalSpeed = SmartDashboard.getNumber("IMUGoal",0);
+    }
     SmartDashboard.delete("CanShoot");
     SmartDashboard.putNumber("goalSpeed",
                              goalSpeed);

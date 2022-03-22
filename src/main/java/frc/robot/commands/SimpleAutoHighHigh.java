@@ -12,9 +12,9 @@ public class SimpleAutoHighHigh extends SequentialCommandGroup {
                 addCommands(
                                 new ParallelCommandGroup(
                                                 new DriveAuto(-.75, m_robotDrive).withTimeout(.95),
-                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout( 2.3)),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED,false ).withTimeout( 2.3)),
                                 new ParallelCommandGroup(
-                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout(1.0),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED,false ).withTimeout(1.0),
                                                 new ConveyorUp(conveyor).withTimeout(1.0)),
                                 new ParallelCommandGroup(
                                                 new DriveAuto(-.75, m_robotDrive).withTimeout(1),
@@ -27,7 +27,7 @@ public class SimpleAutoHighHigh extends SequentialCommandGroup {
                                                                                                 .withTimeout(2.0),
                                                                 new DriveAuto(.75, m_robotDrive).withTimeout(.75))),
                                 new ParallelCommandGroup(
-                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout( 3.0),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED,false ).withTimeout( 3.0),
                                                 new ConveyorUp(conveyor).withTimeout(3.0)));
         }
 
