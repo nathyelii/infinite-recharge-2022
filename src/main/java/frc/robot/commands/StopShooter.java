@@ -1,38 +1,39 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
-public
-class FollowPath extends CommandBase {
+public class StopShooter extends CommandBase{
+    private final Shooter m_shooter;
+  int index = 0;
+  double[] history;
+  int rollingAverageSize;
+  private double goalSpeed;
 
 
-  private final Drivetrain m_drivetrain;
-
-
-  /**
-   * Creates a new TankDrive command.
-   *
-   * @param drivetrain The drivetrain subsystem to drive
-   */
   public
-  FollowPath(Drivetrain drivetrain) {
+  StopShooter(Shooter shooter, double goalSpeed) {
     super();
-    m_drivetrain = drivetrain;
-    addRequirements(m_drivetrain);
+    m_shooter = shooter;
+    addRequirements(m_shooter);
+    this.goalSpeed = goalSpeed;
+
   }
 
-
-  // Called when the command is initially scheduled.
   @Override
   public
   void initialize() {
+    m_shooter.set(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public
   void execute() {
+    if(m_shooter.getEncoderRate() > goalSpeed){
+        m_shooter.set(-1);
+      }
+
 
   }
 
@@ -40,8 +41,8 @@ class FollowPath extends CommandBase {
   @Override
   public
   void end(boolean interrupted) {
-    m_drivetrain.arcadeDrive(0,
-                             0);
+   
+    m_shooter.set(0);
   }
 
   // Returns true when the command should end.

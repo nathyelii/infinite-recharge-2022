@@ -17,7 +17,7 @@ class DoubleCargoLowLow extends SequentialCommandGroup {
     addCommands(new WarmUpShooter(shooter,
                                   10).withTimeout(5.0),
                 new ParallelCommandGroup(new Shoot(shooter,
-                                                   ShooterConstants.LOW_GOAL_SPEED).withTimeout(2.0),
+                                                   ShooterConstants.LOW_GOAL_SPEED,false).withTimeout(2.0),
                                          new ConveyorUp(conveyor).withTimeout(2.0)),
                 RobotContainer
                   .followPath(m_robotDrive,
@@ -31,7 +31,7 @@ class DoubleCargoLowLow extends SequentialCommandGroup {
                   .deadlineWith(new WarmUpShooter(shooter,
                                                   50)),
                 new ParallelCommandGroup(new Shoot(shooter,
-                                                   ShooterConstants.LOW_GOAL_SPEED).withTimeout(2.0),
+                                                   ShooterConstants.LOW_GOAL_SPEED,false).withTimeout(2.0),
                                          new ConveyorUp(conveyor).withTimeout(2.0)));
   }
 

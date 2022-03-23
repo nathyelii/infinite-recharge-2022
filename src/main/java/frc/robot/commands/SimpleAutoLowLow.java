@@ -12,9 +12,9 @@ class SimpleAutoLowLow extends SequentialCommandGroup {
   public
   SimpleAutoLowLow(Shooter shooter, Conveyor conveyor, Drivetrain m_robotDrive) {
     addCommands(new Shoot(shooter,
-                          ShooterConstants.LOW_GOAL_SPEED).withTimeout(2.0),
+                          ShooterConstants.LOW_GOAL_SPEED,false).withTimeout(2.0),
                 new ParallelCommandGroup(new Shoot(shooter,
-                                                   ShooterConstants.LOW_GOAL_SPEED).withTimeout(2.5),
+                                                   ShooterConstants.LOW_GOAL_SPEED,false).withTimeout(2.5),
                                          new ConveyorUp(conveyor).withTimeout(1.0)),
                 new ParallelCommandGroup(new DriveAuto(-.75,
                                                        m_robotDrive).withTimeout(2.25),
@@ -29,7 +29,7 @@ class SimpleAutoLowLow extends SequentialCommandGroup {
                 new WarmUpShooter(shooter,
                                   ShooterConstants.LOW_GOAL_SPEED).withTimeout(.25),
                 new ParallelCommandGroup(new Shoot(shooter,
-                                                   ShooterConstants.LOW_GOAL_SPEED).withTimeout(3.0),
+                                                   ShooterConstants.LOW_GOAL_SPEED,false).withTimeout(3.0),
                                          new ConveyorUp(conveyor).withTimeout(3.0)));
   }
 

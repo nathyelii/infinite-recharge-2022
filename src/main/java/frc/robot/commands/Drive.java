@@ -48,9 +48,8 @@ class Drive extends CommandBase {
   @Override
   public
   void execute() {
-    m_drivetrain.arcadeDrive(m_left.getAsDouble(),
-                             m_right.getAsDouble());
-    m_drivetrain.log();
+    m_drivetrain.arcadeDrive(m_right.getAsDouble(),
+                             m_left.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

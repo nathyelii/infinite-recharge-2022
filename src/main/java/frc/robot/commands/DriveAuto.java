@@ -38,17 +38,14 @@ class DriveAuto extends CommandBase {
   @Override
   public
   void execute() {
-    m_drivetrain.arcadeDrive(0,
-                             speed);
-    m_drivetrain.log();
+    m_drivetrain.arcadeDrive(speed, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public
   void end(boolean interrupted) {
-    m_drivetrain.arcadeDrive(0,
-                             0);
+    m_drivetrain.arcadeDrive(0, 0);
   }
 
   // Returns true when the command should end.

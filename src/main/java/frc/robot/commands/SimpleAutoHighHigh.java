@@ -11,16 +11,15 @@ public class SimpleAutoHighHigh extends SequentialCommandGroup {
         public SimpleAutoHighHigh(Shooter shooter, Conveyor conveyor, Drivetrain m_robotDrive) {
                 addCommands(
                                 new ParallelCommandGroup(
-                                                new DriveAuto(-.75, m_robotDrive).withTimeout(.25),
-                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout( 2.0)),
+                                                new DriveAuto(-.75, m_robotDrive).withTimeout(.95),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED,false ).withTimeout( 2.3)),
                                 new ParallelCommandGroup(
-                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout( 2.5),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED,false ).withTimeout(1.0),
                                                 new ConveyorUp(conveyor).withTimeout(1.0)),
                                 new ParallelCommandGroup(
                                                 new DriveAuto(-.75, m_robotDrive).withTimeout(1),
                                                 new WarmUpShooter(shooter, 0.0).withTimeout(3.0),
-                                                new ConveyorUp(conveyor).withTimeout(2.5)),
-                                new ConveyorDown(conveyor, 0).withTimeout(.25),
+                                                new ConveyorUp(conveyor).withTimeout(1.4)),
                                 new ParallelCommandGroup(
                                                 new SequentialCommandGroup(
                                                                 new WarmUpShooter(shooter,
@@ -28,7 +27,7 @@ public class SimpleAutoHighHigh extends SequentialCommandGroup {
                                                                                                 .withTimeout(2.0),
                                                                 new DriveAuto(.75, m_robotDrive).withTimeout(.75))),
                                 new ParallelCommandGroup(
-                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED ).withTimeout( 3.0),
+                                                new Shoot(shooter, ShooterConstants.HIGH_GOAL_SPEED,false ).withTimeout( 3.0),
                                                 new ConveyorUp(conveyor).withTimeout(3.0)));
         }
 
