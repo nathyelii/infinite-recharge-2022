@@ -81,6 +81,13 @@ class Constants {
   }
 
   public static final
+  class CameraConstants {
+    public static final double TARGET_HEIGHT_METERS  = Units.feetToMeters(8) + Units.inchesToMeters(8);
+    public static  final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(29);
+    public static final double CAMERA_PITCH_RADRINAS = Units.degreesToRadians(23);
+  }
+
+  public static final
   class AutoConstants {
     public static final double CENTIMETER = 1;
     public static final double METER = 100;
