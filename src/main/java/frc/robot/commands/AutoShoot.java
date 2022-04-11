@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.CameraConstants;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,17 +19,18 @@ public class AutoShoot extends CommandBase {
     private final Shooter m_shooter;
     private final PhotonCamera m_camera;
     PhotonPipelineResult result;
+    BangBangController controller;
 
-     public AutoShoot(Shooter shooter, PhotonCamera camera) {
+    public AutoShoot(Shooter shooter, PhotonCamera camera) {
         super();
         m_shooter = shooter;
         m_camera = camera;
+        controller = new BangBangController();
         addRequirements(shooter);
     }
 
-    private double equation(double input)
-    {
-        return .25*input+56.4;
+    private double equation(double input) {
+        return .14 * input + 52.638;
     }
 
     @Override
@@ -45,11 +47,20 @@ public class AutoShoot extends CommandBase {
         if (result.hasTargets()) {
             PhotonTrackedTarget bestTarget = result.getBestTarget();
 
-            double range = PhotonUtils.calculateDistanceToTargetMeters(CameraConstants.CAMERA_HEIGHT_METERS, CameraConstants.TARGET_HEIGHT_METERS,
-            CameraConstants.CAMERA_PITCH_RADRINAS, Units.degreesToRadians(bestTarget.getPitch()));
-                    //the equation we used is for inches
-                    m_shooter.set(equation(Units.metersToInches(range)));
-            
+            double range = PhotonUtils.calculateDistanceToTargetMeters(CameraConstants.CAMERA_HEIGHT_METERS,
+                    CameraConstants.TARGET_HEIGHT_METERS,
+                    CameraConstants.CAMERA_PITCH_RADRINAS, Units.degreesToRadians(bestTarget.getPitch()));
+            // the equation we used is for inches
+            double goalSpeed = equation(Units.metersToInches(range));
+            SmartDashboard.putNumber("goalSpeed",
+                    goalSpeed);
+            double speed = controller.calculate(m_shooter.getEncoderRate(),
+                    goalSpeed);
+            SmartDashboard.putNumber("Shooter Speed",
+                    m_shooter.getEncoderRate());
+            SmartDashboard.putNumber("goalSpeed",
+                    goalSpeed);
+            m_shooter.set(speed);
         }
 
     }

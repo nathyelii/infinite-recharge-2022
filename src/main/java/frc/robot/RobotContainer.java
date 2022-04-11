@@ -175,7 +175,7 @@ public class RobotContainer {
                     "SIMPLEAUTOHIGHHIGH");
             return new SimpleAutoHighHigh(m_shooter,
                     m_conveyor,
-                    m_drivetrain);
+                    m_drivetrain, camera);
             /*
              * String trajectoryJSON = "paths/output/driveToBlueStation.wpilib.json";
              * Trajectory trajectory = new Trajectory();
@@ -233,7 +233,7 @@ public class RobotContainer {
                         "SIMPLEAUTOHIGHHIGH");
                 return new SimpleAutoHighHigh(m_shooter,
                         m_conveyor,
-                        m_drivetrain);
+                        m_drivetrain, camera);
         }
 
         return null;
